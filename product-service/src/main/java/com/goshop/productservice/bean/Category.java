@@ -1,4 +1,4 @@
-package pm.goshop.productservice.bean;
+package com.goshop.productservice.bean;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -1,11 +1,11 @@
-package pm.goshop.productservice.controller;
+package com.goshop.productservice.controller;
 
+import com.goshop.productservice.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pm.goshop.productservice.Configuration;
-import pm.goshop.productservice.bean.ProductConfiguration;
+import com.goshop.productservice.bean.ProductConfiguration;
 
 @RestController
 public class RestTest {

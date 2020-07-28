@@ -1,4 +1,4 @@
-package pm.goshop.productservice.controller;
+package com.goshop.productservice.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

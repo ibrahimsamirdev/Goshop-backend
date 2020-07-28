@@ -8,7 +8,7 @@
 		<version>2.3.2.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>pm.goshop</groupId>
+	<groupId>com.goshop</groupId>
 	<artifactId>product-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>product-service</name>

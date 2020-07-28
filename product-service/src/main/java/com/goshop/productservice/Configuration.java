@@ -1,4 +1,4 @@
-package pm.goshop.productservice;
+package com.goshop.productservice;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

@@ -1,4 +1,4 @@
-package pm.goshop.productservice.controller;
+package com.goshop.productservice.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import pm.goshop.productservice.bean.Product;
-import pm.goshop.productservice.service.ProductService;
+import com.goshop.productservice.bean.Product;
+import com.goshop.productservice.service.ProductService;
 
 @RestController
 @RequestMapping("/product")

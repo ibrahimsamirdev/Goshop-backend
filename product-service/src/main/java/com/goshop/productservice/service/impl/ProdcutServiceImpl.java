@@ -1,24 +1,23 @@
-package pm.goshop.productservice.service.impl;
+package com.goshop.productservice.service.impl;
 
 import java.util.List;
 
+import com.goshop.productservice.bean.Product;
+import com.goshop.productservice.exception.NoSuchResourceException;
+import com.goshop.productservice.repository.ProductRepository;
+import com.goshop.productservice.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import pm.goshop.productservice.bean.Product;
-import pm.goshop.productservice.exception.NoSuchResourceException;
-import pm.goshop.productservice.repository.ProductRepository;
-import pm.goshop.productservice.service.ProductService;
-
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
 public class ProdcutServiceImpl implements ProductService {
 	
 	@Autowired
-	ProductRepository productRepository;
+    ProductRepository productRepository;
 
 	@Override
 	public Product addProduct(Product product) {
