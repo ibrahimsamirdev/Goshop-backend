@@ -27,26 +27,30 @@ public class ProdcutServiceImpl implements ProductService {
 
 	@Override
 	public Product getProduct(long productId) throws NoSuchResourceException {
-		// TODO Auto-generated method stub
-		return null;
+		Product product = productRepository.findById(productId).orElseThrow(() -> 
+		new NoSuchResourceException("No Product found  with" , productId));
+		
+		return product;
 	}
 
+	
 	@Override
 	public List<Product> getProducts() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return productRepository.findAll();
 	}
 
 	@Override
-	public Product updateBlock(long productID) {
+	public Product updateProduct(long productID, Product update_product) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 	@Override
 	public ResponseEntity<Void> deleteProduct(long productId) throws NoSuchResourceException {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 }

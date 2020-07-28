@@ -12,7 +12,7 @@ public interface ProductService {
 	public Product getProduct(long productId) throws NoSuchResourceException;
 	public List<Product> getProducts();
 
-	public Product updateBlock(long productID);
+	public Product updateProduct(long productID, Product update_product);
 	public ResponseEntity<Void> deleteProduct(long productId) throws NoSuchResourceException;
 
 }
