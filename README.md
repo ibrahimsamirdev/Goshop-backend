@@ -20,3 +20,16 @@ The Back-end of Goshop, an E-commerce platform (Java, Microservices)
 | product service | http://localhost:8080/product/config |
 | order service | http://localhost:8000/order/config |
 | payment service | http://localhost:8000/payment/config |
+
+## VM Argument
+
+-Dserver.port=8001
+
+## Commands
+
+mkdir git-repo
+cd git-repo/
+git init
+git add -A
+git commit -m "first commit"
+
