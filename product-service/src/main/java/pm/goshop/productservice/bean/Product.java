@@ -22,7 +22,7 @@ public class Product {
 	private long id;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "courseId", nullable = false)
+	@JoinColumn(name = "categoryId", nullable = false)
 	@Valid
 	@NotNull
 	private Category category;
