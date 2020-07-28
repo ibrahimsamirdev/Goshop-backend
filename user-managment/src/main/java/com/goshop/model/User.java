@@ -1,6 +1,7 @@
 package com.goshop.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class User {
@@ -9,13 +10,13 @@ public class User {
     @GeneratedValue
     private long id;
     private String name;
+    @Column(unique = true, length = 250)
     private String email;
     private String pass;
-    private String phone;
-    private Boolean isSubscribe;
-    @OneToOne
-    @JoinColumn(name="address_id")
-    private Address address;
+    private String mobile;
+    private Boolean isSubscribed;
+    @OneToMany
+    private Set<Address> addresses;
     @ManyToOne
     @JoinColumn(name= "role_id")
     private Role role;
@@ -52,28 +53,28 @@ public class User {
         this.pass = pass;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getMobile() {
+        return mobile;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
-    public Boolean getSubscribe() {
-        return isSubscribe;
+    public Boolean getSubscribed() {
+        return isSubscribed;
     }
 
-    public void setSubscribe(Boolean subscribe) {
-        isSubscribe = subscribe;
+    public void setSubscribed(Boolean subscribed) {
+        isSubscribed = subscribed;
     }
 
-    public Address getAddress() {
-        return address;
+    public Set<Address> getAddresses() {
+        return addresses;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setAddresses(Set<Address> addresses) {
+        this.addresses = addresses;
     }
 
     public Role getRole() {

@@ -15,6 +15,7 @@ public class PaymentMethod {
     private CardType type;
     private LocalDate expireDate;
     private int csv;
+    private String nameOnCard;
 
     public long getId() {
         return id;
@@ -54,5 +55,13 @@ public class PaymentMethod {
 
     public void setCsv(int csv) {
         this.csv = csv;
+    }
+
+    public String getNameOnCard() {
+        return nameOnCard;
+    }
+
+    public void setNameOnCard(String nameOnCard) {
+        this.nameOnCard = nameOnCard;
     }
 }

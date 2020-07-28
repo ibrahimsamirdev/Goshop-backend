@@ -1,4 +1,4 @@
-package com.goshop.productservice.bean;
+package com.goshop.productservice.model;
 
 import java.util.Date;
 

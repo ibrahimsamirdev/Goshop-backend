@@ -2,7 +2,7 @@ package com.goshop.productservice.service.impl;
 
 import java.util.List;
 
-import com.goshop.productservice.bean.Product;
+import com.goshop.productservice.model.Product;
 import com.goshop.productservice.exception.NoSuchResourceException;
 import com.goshop.productservice.repository.ProductRepository;
 import com.goshop.productservice.service.ProductService;

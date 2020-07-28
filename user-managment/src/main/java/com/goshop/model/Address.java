@@ -13,6 +13,7 @@ public class Address {
     private String city;
     private String country;
     private String street;
+    private int zipcode;
     private AddressType type;
 
     public long getId() {
@@ -45,6 +46,14 @@ public class Address {
 
     public void setStreet(String street) {
         this.street = street;
+    }
+
+    public int getZipcode() {
+        return zipcode;
+    }
+
+    public void setZipcode(int zipcode) {
+        this.zipcode = zipcode;
     }
 
     public AddressType getType() {

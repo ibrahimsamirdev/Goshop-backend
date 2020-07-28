@@ -1,4 +1,4 @@
-package com.goshop.productservice.bean;
+package com.goshop.productservice.configuration;
 
 public class ProductConfiguration {
 

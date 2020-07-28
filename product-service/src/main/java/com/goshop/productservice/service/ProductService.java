@@ -2,7 +2,7 @@ package com.goshop.productservice.service;
 
 import java.util.List;
 
-import com.goshop.productservice.bean.Product;
+import com.goshop.productservice.model.Product;
 import org.springframework.http.ResponseEntity;
 
 import com.goshop.productservice.exception.NoSuchResourceException;
