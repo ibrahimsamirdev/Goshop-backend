@@ -27,10 +27,10 @@ The Back-end of Goshop, an E-commerce platform (Java, Microservices)
 
 ## Commands
 
-mkdir git-repo
-cd git-repo/
-git init
-git add -A
+mkdir git-repo<br/>
+cd git-repo/<br/>
+git init<br/>
+git add -A<br/>
 git commit -m "first commit"
 
 ## Configuration repository  
