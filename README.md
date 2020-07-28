@@ -33,3 +33,6 @@ git init
 git add -A
 git commit -m "first commit"
 
+## Configuration repository  
+
+https://github.com/EmadAtefAtta/config-repo
