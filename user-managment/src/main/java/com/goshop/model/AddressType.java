@@ -1,4 +1,4 @@
-package edu.miu.model;
+package com.goshop.model;
 
 public enum AddressType {
     home,shipping,billing

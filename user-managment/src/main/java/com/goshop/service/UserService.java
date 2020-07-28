@@ -1,4 +1,4 @@
-package edu.miu.service;
+package com.goshop.service;
 
 import org.springframework.stereotype.Service;
 

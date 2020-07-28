@@ -1,4 +1,4 @@
-package edu.miu.repository;
+package com.goshop.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

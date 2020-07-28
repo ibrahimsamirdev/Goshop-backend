@@ -1,4 +1,4 @@
-package edu.miu.model;
+package com.goshop.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -1,7 +1,6 @@
-package edu.miu.model;
+package com.goshop.model;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 public class User {

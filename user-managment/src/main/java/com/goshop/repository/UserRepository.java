@@ -1,6 +1,6 @@
-package edu.miu.repository;
+package com.goshop.repository;
 
-import edu.miu.model.User;
+import com.goshop.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User,Long> {
