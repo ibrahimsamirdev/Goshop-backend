@@ -13,7 +13,7 @@ The Back-end of Goshop, an E-commerce platform (Java, Microservices)
 
 ## URLs
 
-| Application | Port |
+| Application | URL |
 | --- | --- |
 | netflix eureka naming server | http://localhost:8761/ |
 | spring cloud config server | http://localhost:8888/product-service/dev http://localhost:8888/product-service/default |
