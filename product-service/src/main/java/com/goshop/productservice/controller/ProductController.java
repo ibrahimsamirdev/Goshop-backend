@@ -6,15 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.goshop.productservice.model.Product;
 import com.goshop.productservice.service.ProductService;
+
 
 @RestController
 @RequestMapping("/product")
@@ -66,6 +69,33 @@ public class ProductController {
 		}
 
 		return new ResponseEntity<Product>(product, HttpStatus.OK);
+	}
+	
+	@PutMapping(value="/{productId}")
+	public ResponseEntity<Product> editProduct(@PathVariable long productId,@RequestBody Product product){
+		
+		HttpHeaders headers = new HttpHeaders();
+		Product product_toEdit = productService.getProduct(productId);
+		
+		if(product_toEdit == null) {
+			
+			return new ResponseEntity<Product>(HttpStatus.NOT_FOUND);
+		}
+		
+		productService.editProduct(productId, product);
+		
+		headers.add("Updated Block : ",String.valueOf(productId));
+		
+		return new ResponseEntity<Product>(product,headers, HttpStatus.OK);
+	}
+	
+	
+	@DeleteMapping(value="/{productId}")
+	public ResponseEntity<Void> deleteProduct(@PathVariable long productId){
+
+		productService.deleteProduct(productId);
+		
+		return  ResponseEntity.noContent().build();
 	}
 
 }
