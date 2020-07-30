@@ -1,4 +1,4 @@
-package edu.miu.orderservice.feignproxy;
+package com.goshop.orderservice.feignproxy;
 
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.cloud.openfeign.FeignClient;
