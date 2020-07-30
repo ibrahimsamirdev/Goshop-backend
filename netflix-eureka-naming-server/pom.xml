@@ -9,6 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
+
 	<groupId>com.goshop</groupId>
 
 	<artifactId>netflix-eureka-naming-server</artifactId>
