@@ -11,8 +11,8 @@
     <groupId>com.goshop</groupId>
     <artifactId>zuul-api-gateway</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>gateway</name>
-    <description>Demo project for Spring Boot</description>
+    <name>zuul-api-gateway</name>
+    <description>zuul-api-gateway for Spring Boot</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -23,6 +23,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

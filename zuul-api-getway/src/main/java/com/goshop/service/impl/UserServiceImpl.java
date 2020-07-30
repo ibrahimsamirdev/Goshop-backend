@@ -3,8 +3,10 @@ package com.goshop.service.impl;
 import com.goshop.Security.JwtTokenProvider;
 import com.goshop.exception.CustomException;
 import com.goshop.model.Role;
+import com.goshop.model.RoleType;
 import com.goshop.model.User;
 import com.goshop.repository.UserRepository;
+import com.goshop.service.RoleService;
 import com.goshop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,7 +33,8 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     private AuthenticationManager authenticationManager;
     @Autowired
     private UserRepository userRepository;
-
+    @Autowired
+    private RoleService roleService;
     @Autowired
     private UserRepository userRepo;
 
@@ -92,7 +95,8 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     }
 
     @Override
-    public User saveUser(User user) {
+    public User saveUser(User user, RoleType roleType) {
+        user.setRole(roleService.getRoleByType(roleType));
         user.setPass(passwordEncoder.encode(user.getPass()) );
         return userRepository.save(user);
     }
