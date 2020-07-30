@@ -1,4 +1,4 @@
-package edu.miu.orderservice;
+package com.goshop.orderservice;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
