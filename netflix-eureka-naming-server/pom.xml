@@ -8,7 +8,11 @@
 		<version>2.3.2.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+<<<<<<< HEAD
 	<groupId>pm.goshop</groupId>
+=======
+	<groupId>edu.miu</groupId>
+>>>>>>> 27670d70870df13d8efab7f85eea546765cca5d1
 	<artifactId>netflix-eureka-naming-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>netflix-eureka-naming-server</name>
