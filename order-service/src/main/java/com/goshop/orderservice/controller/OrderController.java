@@ -1,4 +1,4 @@
 package com.goshop.orderservice.controller;
 
-public class Order {
+public class OrderController {
 }

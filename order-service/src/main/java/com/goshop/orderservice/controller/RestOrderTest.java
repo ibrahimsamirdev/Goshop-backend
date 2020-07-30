@@ -1,11 +1,11 @@
-package edu.miu.orderservice.controller;
+package com.goshop.orderservice.controller;
 
-import edu.miu.orderservice.configuration.Configuration;
-import edu.miu.orderservice.feignproxy.ProductProxy;
+import com.goshop.orderservice.configuration.Configuration;
+import com.goshop.orderservice.configuration.OrderConfiguration;
+import com.goshop.orderservice.feignproxy.ProductProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import edu.miu.orderservice.configuration.OrderConfiguration;
 
 @RestController
 public class RestOrderTest {
