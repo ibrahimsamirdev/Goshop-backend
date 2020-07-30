@@ -1,4 +1,4 @@
-package pm.goshop.paymentservice.bean;
+package edu.miu.paymentservice.bean;
 
 public class PaymentConfiguration {
     private int minimum;

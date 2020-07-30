@@ -1,4 +1,4 @@
-package pm.goshop.orderservice;
+package edu.miu.orderservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

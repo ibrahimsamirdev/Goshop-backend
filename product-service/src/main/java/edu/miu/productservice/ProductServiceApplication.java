@@ -1,4 +1,4 @@
-package com.goshop.productservice;
+package edu.miu.productservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package com.goshop.productservice.configuration;
+package edu.miu.productservice.configuration;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

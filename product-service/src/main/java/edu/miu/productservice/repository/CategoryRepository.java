@@ -1,8 +1,8 @@
-package com.goshop.productservice.repository;
+package edu.miu.productservice.repository;
 
 
 
-import com.goshop.productservice.model.Category;
+import edu.miu.productservice.model.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

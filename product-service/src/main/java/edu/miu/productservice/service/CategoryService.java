@@ -1,4 +1,4 @@
-package com.goshop.productservice.service;
+package edu.miu.productservice.service;
 
 public interface CategoryService {
 

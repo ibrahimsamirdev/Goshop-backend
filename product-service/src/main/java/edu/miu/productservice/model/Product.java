@@ -1,4 +1,4 @@
-package com.goshop.productservice.model;
+package edu.miu.productservice.model;
 
 import java.util.Date;
 

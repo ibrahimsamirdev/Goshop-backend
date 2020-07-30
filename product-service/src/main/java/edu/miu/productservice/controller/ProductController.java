@@ -1,7 +1,9 @@
-package com.goshop.productservice.controller;
+package edu.miu.productservice.controller;
 
 import java.util.List;
 
+import edu.miu.productservice.model.Product;
+import edu.miu.productservice.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -15,16 +17,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.goshop.productservice.model.Product;
-import com.goshop.productservice.service.ProductService;
-
 
 @RestController
 @RequestMapping("/product")
 public class ProductController {
 	
 	@Autowired
-	ProductService productService;
+    ProductService productService;
 	
 	
 	@PostMapping(value = "/")

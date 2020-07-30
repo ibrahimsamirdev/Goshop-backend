@@ -1,4 +1,4 @@
-package com.goshop.productservice.controller;
+package edu.miu.productservice.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

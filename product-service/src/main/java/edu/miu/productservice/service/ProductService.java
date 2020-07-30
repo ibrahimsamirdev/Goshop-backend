@@ -1,11 +1,10 @@
-package com.goshop.productservice.service;
+package edu.miu.productservice.service;
 
 import java.util.List;
 
-import com.goshop.productservice.model.Product;
+import edu.miu.productservice.model.Product;
+import edu.miu.productservice.exception.NoSuchResourceException;
 import org.springframework.http.ResponseEntity;
-
-import com.goshop.productservice.exception.NoSuchResourceException;
 
 public interface ProductService {
 	public Product addProduct(Product product);

@@ -1,4 +1,4 @@
-package com.goshop.productservice.controller;
+package edu.miu.productservice.controller;
 
 import java.util.List;
 
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.goshop.productservice.model.Promotion;
-import com.goshop.productservice.service.PromotionService;
+import edu.miu.productservice.model.Promotion;
+import edu.miu.productservice.service.PromotionService;
 
 @RestController
 @RequestMapping("/promotion")

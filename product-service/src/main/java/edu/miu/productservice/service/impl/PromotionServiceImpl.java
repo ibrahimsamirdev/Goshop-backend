@@ -1,24 +1,23 @@
-package com.goshop.productservice.service.impl;
+package edu.miu.productservice.service.impl;
 
 import java.util.List;
 
+import edu.miu.productservice.exception.NoSuchResourceException;
+import edu.miu.productservice.model.Promotion;
+import edu.miu.productservice.repository.PromotionRepository;
+import edu.miu.productservice.service.PromotionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.goshop.productservice.exception.NoSuchResourceException;
-import com.goshop.productservice.model.Promotion;
-import com.goshop.productservice.repository.PromotionRepository;
-import com.goshop.productservice.service.PromotionService;
-
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
 public class PromotionServiceImpl implements PromotionService {
 
 	@Autowired
-	PromotionRepository promotionRepository;
+    PromotionRepository promotionRepository;
 	
 	@Override
 	public Promotion addPromotion(Promotion promotion) {

@@ -1,4 +1,4 @@
-package pm.goshop.springcloudconfigserver;
+package edu.miu.springcloudconfigserver;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,11 +1,10 @@
-package com.goshop.productservice.service;
+package edu.miu.productservice.service;
 
 import java.util.List;
 
+import edu.miu.productservice.exception.NoSuchResourceException;
+import edu.miu.productservice.model.Promotion;
 import org.springframework.http.ResponseEntity;
-
-import com.goshop.productservice.exception.NoSuchResourceException;
-import com.goshop.productservice.model.Promotion;
 
 public interface PromotionService {
 	

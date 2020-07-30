@@ -1,11 +1,11 @@
-package com.goshop.productservice.service.impl;
+package edu.miu.productservice.service.impl;
 
 import java.util.List;
 
-import com.goshop.productservice.model.Product;
-import com.goshop.productservice.exception.NoSuchResourceException;
-import com.goshop.productservice.repository.ProductRepository;
-import com.goshop.productservice.service.ProductService;
+import edu.miu.productservice.model.Product;
+import edu.miu.productservice.exception.NoSuchResourceException;
+import edu.miu.productservice.repository.ProductRepository;
+import edu.miu.productservice.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

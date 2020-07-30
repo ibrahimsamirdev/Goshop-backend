@@ -1,4 +1,4 @@
-package pm.goshop.netflixeurekanamingserver;
+package edu.miu.netflixeurekanamingserver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

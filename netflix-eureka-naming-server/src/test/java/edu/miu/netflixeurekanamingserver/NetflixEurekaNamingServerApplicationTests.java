@@ -1,4 +1,4 @@
-package pm.goshop.netflixeurekanamingserver;
+package edu.miu.netflixeurekanamingserver;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

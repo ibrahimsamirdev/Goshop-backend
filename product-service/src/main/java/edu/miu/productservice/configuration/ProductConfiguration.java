@@ -1,4 +1,4 @@
-package com.goshop.productservice.configuration;
+package edu.miu.productservice.configuration;
 
 public class ProductConfiguration {
 

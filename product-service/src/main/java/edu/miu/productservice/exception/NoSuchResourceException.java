@@ -1,4 +1,4 @@
-package com.goshop.productservice.exception;
+package edu.miu.productservice.exception;
 
 public class NoSuchResourceException extends RuntimeException {
 	

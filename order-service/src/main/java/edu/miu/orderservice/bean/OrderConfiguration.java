@@ -1,4 +1,4 @@
-package pm.goshop.orderservice.bean;
+package edu.miu.orderservice.bean;
 
 public class OrderConfiguration {
 
