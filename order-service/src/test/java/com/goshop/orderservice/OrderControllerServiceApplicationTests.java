@@ -1,10 +1,10 @@
-package edu.miu.orderservice;
+package com.goshop.orderservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class OrderServiceApplicationTests {
+class OrderControllerServiceApplicationTests {
 
 	@Test
 	void contextLoads() {

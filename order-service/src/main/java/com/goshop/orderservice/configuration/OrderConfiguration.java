@@ -1,4 +1,4 @@
-package com.goshop.orderservice.bean;
+package com.goshop.orderservice.configuration;
 
 public class OrderConfiguration {
 
