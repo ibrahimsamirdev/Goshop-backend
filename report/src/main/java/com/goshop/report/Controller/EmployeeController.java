@@ -34,8 +34,11 @@ public class EmployeeController {
     public void getDocumentnew(HttpServletResponse response) {
         log.info("Preparing the pdf report via jasper.");
         List<Employee> dataList = eservice.findAll();
-        Map parameters = new HashMap();
-        String pathname = "E:\\MUM\\9-PM\\0-git-repo\\Goshop-backend\\report\\src\\main\\resources\\templates\\test.jrxml";
+        Map <String,String> parameters = new HashMap();
+
+        parameters.put("createdBy","sony");
+
+        String pathname = "E:\\MUM\\9-PM\\0-git-repo\\Goshop-backend\\report\\src\\main\\resources\\templates\\viewSalesReports.jrxml";
         try {
             response = createReport.createPdfReport(response, dataList, parameters, pathname);
             log.info("Report create in response successfully saved at response.");
