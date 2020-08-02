@@ -13,4 +13,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query("SELECT d from Product d where d.VendorId= :id order by d.id")
     List<Product> findRProductsByVendorId(@Param("id") Long id);
+
+    @Query("SELECT d from Product d order by d.VendorId,d.id")
+    List<Product> findRProductsAdmin();
 }

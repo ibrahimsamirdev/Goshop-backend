@@ -7,4 +7,5 @@ import java.util.List;
 public interface ReportService {
 
     public List<Product> getReportProduct(Long id);
+    public List<Product> getReportProductForAdmin();
 }

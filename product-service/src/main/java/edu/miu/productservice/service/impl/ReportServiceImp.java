@@ -22,4 +22,9 @@ public class ReportServiceImp implements ReportService {
     public List<Product> getReportProduct(Long id) {
         return productRepository.findRProductsByVendorId(id);
     }
+
+    @Override
+    public List<Product> getReportProductForAdmin() {
+        return productRepository.findRProductsAdmin();
+    }
 }

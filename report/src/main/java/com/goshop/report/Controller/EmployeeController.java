@@ -1,7 +1,7 @@
 package com.goshop.report.Controller;
 
 import com.goshop.report.model.Employee;
-import com.goshop.report.service.CreateReport;
+import com.goshop.report.service.CreateReportService;
 import com.goshop.report.service.EmployeeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +27,7 @@ public class EmployeeController {
     EmployeeService eservice;
 
     @Autowired
-    CreateReport createReport;
+    CreateReportService createReportService;
 
 
 
@@ -42,7 +42,7 @@ public class EmployeeController {
 
         String pathname = "E:\\MUM\\9-PM\\0-git-repo\\Goshop-backend\\report\\src\\main\\resources\\templates\\viewSalesReports.jrxml";
         try {
-            response = createReport.createPdfReport(response, dataList, parameters, pathname);
+            response = createReportService.createPdfReport(response, dataList, parameters, pathname);
             log.info("Report create in response successfully saved at response.");
 
         } catch (final Exception e) {

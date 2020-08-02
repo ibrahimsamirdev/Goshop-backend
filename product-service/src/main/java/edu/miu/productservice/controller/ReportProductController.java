@@ -1,5 +1,6 @@
 package edu.miu.productservice.controller;
 
+import edu.miu.productservice.dto.AdminReportProductDto;
 import edu.miu.productservice.dto.ReportProductDto;
 import edu.miu.productservice.model.Product;
 import edu.miu.productservice.service.ReportService;
@@ -29,6 +30,19 @@ public class ReportProductController {
         return products.stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
+    }
+
+    @GetMapping("/salesForAdmin")
+    public List<AdminReportProductDto> salesReportsAdmin() {
+        List<Product> products = reportService.getReportProductForAdmin();
+
+        return products.stream()
+                .map(this::convertToDtoAdmin)
+                .collect(Collectors.toList());
+    }
+
+    private AdminReportProductDto convertToDtoAdmin(Product product) {
+        return modelMapper.map(product, AdminReportProductDto.class);
     }
 
     private ReportProductDto convertToDto(Product product) {
