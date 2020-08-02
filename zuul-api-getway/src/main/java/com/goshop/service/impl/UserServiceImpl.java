@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
         return org.springframework.security.core.userdetails.User//
                 .withUsername(email)//
-                .password(user.getPass())//
+                .password(user.getPassword())//
                 .authorities(authority)//
                 .accountExpired(false)//
                 .accountLocked(false)//
@@ -97,7 +97,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     @Override
     public User saveUser(User user, RoleType roleType) {
         user.setRole(roleService.getRoleByType(roleType));
-        user.setPass(passwordEncoder.encode(user.getPass()) );
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
