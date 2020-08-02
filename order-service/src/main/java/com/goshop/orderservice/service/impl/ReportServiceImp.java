@@ -1,6 +1,7 @@
 package com.goshop.orderservice.service.impl;
 
 import com.goshop.orderservice.model.OrderDetails;
+import com.goshop.orderservice.model.Orders;
 import com.goshop.orderservice.repository.OrderDetailsRepository;
 import com.goshop.orderservice.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,9 @@ public class ReportServiceImp implements ReportService {
 
 
     @Override
-    public Optional<OrderDetails> findByProduct(Long pId) {
-//        return orderDetailsRepository.findProductIdById(pId);
-        return  orderDetailsRepository.findById(pId);
+    public int findByProduct(Long pId) {
+        System.out.println("33 ========: "+pId +orderDetailsRepository.findProductIdById(pId) );
+       return orderDetailsRepository.findProductIdById(pId);
+        //return  orderDetailsRepository.findById(pId);
     }
 }

@@ -1,6 +1,5 @@
 package com.goshop.orderservice.controller;
 
-import com.goshop.orderservice.model.OrderDetails;
 import com.goshop.orderservice.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,10 +14,13 @@ public class Report {
     ReportService reportService;
 
     @GetMapping("/salesByVendor")
-    public Optional<OrderDetails> salesByVendor(){
+    public int salesByVendor(){
 
-//        System.out.println("reportService  :  "+reportService.findByProduct((long) 1).get());
-        return reportService.findByProduct((long) 1);
+        int orderDetails=   reportService.findByProduct((long) 1);
+
+             return reportService.findByProduct((long) 1);
+
+
     }
 
     @GetMapping("/hello")
