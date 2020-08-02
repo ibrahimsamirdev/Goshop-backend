@@ -8,13 +8,13 @@ import java.util.List;
 public class Order {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private long userId;
     private double totalAmount;
     private long addressId;
     private long paymentId;
-    @OneToMany(mappedBy ="order")
+    @OneToMany(mappedBy ="order",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<OrderDetails> orderDetails;
 
     public long getId() {

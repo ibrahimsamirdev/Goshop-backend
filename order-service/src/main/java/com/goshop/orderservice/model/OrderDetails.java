@@ -7,9 +7,9 @@ import javax.persistence.*;
 public class OrderDetails {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "orderId")
     private Order order;
     private long productId;
