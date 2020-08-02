@@ -2,20 +2,22 @@ package com.goshop.orderservice.model;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="orders")
-public class Order {
+public class Orders {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private long userId;
     private double totalAmount;
     private long addressId;
     private long paymentId;
-    @OneToMany(mappedBy ="order")
-    private List<OrderDetails> orderDetails;
+
+    @OneToMany(mappedBy = "orders", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<OrderDetails> orderDetails;
 
     public long getId() {
         return id;
@@ -57,11 +59,11 @@ public class Order {
         this.paymentId = paymentId;
     }
 
-    public List<OrderDetails> getOrderDetails() {
+    public Set<OrderDetails> getOrderDetails() {
         return orderDetails;
     }
 
-    public void setOrderDetails(List<OrderDetails> orderDetails) {
+    public void setOrderDetails(Set<OrderDetails> orderDetails) {
         this.orderDetails = orderDetails;
     }
 }
