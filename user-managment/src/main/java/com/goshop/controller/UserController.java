@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,12 +28,24 @@ public class UserController {
 	/**
 	 * Get all users
 	 * 
-	 * @return User Object
+	 * @return List of User objects
 	 */
 	@GetMapping("/")
 	public ResponseEntity<Object> getAllUsers() {
 		List<User> users = userService.getAll();
-		return new ResponseEntity<Object>(users, HttpStatus.CREATED);
+		return new ResponseEntity<Object>(users, HttpStatus.OK);
+	}
+
+	/**
+	 * Get User by Id
+	 * 
+	 * @param id - user id
+	 * @return User object
+	 */
+	@GetMapping("/{id}")
+	public ResponseEntity<Object> getUserById(@PathVariable long id) {
+		User user = userService.getById(id);
+		return new ResponseEntity<Object>(user, HttpStatus.OK);
 	}
 
 }
