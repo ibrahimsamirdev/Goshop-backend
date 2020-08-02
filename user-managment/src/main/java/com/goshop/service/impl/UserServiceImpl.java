@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.goshop.exception.CustomException;
+import com.goshop.model.RoleType;
 import com.goshop.model.User;
 import com.goshop.repository.UserRepository;
 import com.goshop.service.UserService;
@@ -34,5 +35,18 @@ public class UserServiceImpl implements UserService {
 		}
 		userRepo.save(user);
 	}
+
+	@Override
+	public List<User> getByRole(RoleType role) {
+		System.out.println("============================*************");
+		return userRepo.findByRole(role);
+	}
+
+//	@Override
+//	public List<User> getByRoleId(long roleId) {
+//		System.out.println("============================*************");
+////		return userRepo.findByMobile("1234");
+//		return userRepo.findByIsSubscribed(false);
+//	}
 
 }

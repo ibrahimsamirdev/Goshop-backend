@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.goshop.model.RoleType;
 import com.goshop.model.User;
 import com.goshop.service.UserService;
 
@@ -48,6 +49,18 @@ public class UserController {
 	public ResponseEntity<Object> getUserById(@PathVariable long id) {
 		User user = userService.getById(id);
 		return new ResponseEntity<Object>(user, HttpStatus.OK);
+	}
+
+	/**
+	 * Get all Users by user role (all vendors, contentCreators,...)
+	 * 
+	 * @param role - RoleType (enum) user role
+	 * @return List of All User objects with a specific role
+	 */
+	@GetMapping("/role/{role}")
+	public ResponseEntity<Object> getUsersByRole(@PathVariable RoleType role) {
+		List<User> users = userService.getByRole(role);
+		return new ResponseEntity<Object>(users, HttpStatus.OK);
 	}
 
 	/**
