@@ -6,7 +6,7 @@ public class ReportProductDto {
     private String description;
     private double price;
     private int stockAmount;
-    private int SoldAmount;
+    private int soldAmount;
 
 
     public long getId() {
@@ -50,10 +50,10 @@ public class ReportProductDto {
     }
 
     public int getSoldAmount() {
-        return SoldAmount;
+        return soldAmount;
     }
 
     public void setSoldAmount(int soldAmount) {
-        SoldAmount = soldAmount;
+        this.soldAmount = soldAmount;
     }
 }

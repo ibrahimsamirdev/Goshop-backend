@@ -31,7 +31,7 @@ public class Product {
     private String imageUrl;
     private int stockAmount;
     private boolean isPublished;
-    private int SoldAmount;
+    private int soldAmount;
 
 
     public Product() {
@@ -51,7 +51,7 @@ public class Product {
         this.imageUrl = imageUrl;
         this.stockAmount = stockAmount;
         this.isPublished = isPublished;
-        this.SoldAmount = soldAmount;
+        this.soldAmount = soldAmount;
         this.VendorId = vendorId;
     }
 
@@ -129,11 +129,11 @@ public class Product {
 
 
     public int getSoldAmount() {
-        return SoldAmount;
+        return this.soldAmount;
     }
 
-    public void setSoldAmount(int soldAmount) {
-        SoldAmount = soldAmount;
+    public void setSoldAmount(int soldamount) {
+        this.soldAmount = soldamount;
     }
 
 	public Long getVendorId() {

@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/report")
 public class salesReportsVendorController {
 
     final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -35,10 +35,11 @@ public class salesReportsVendorController {
         log.info("Preparing the pdf report via jasper.");
 
        List<ReportProductDto>reportProductDtos=  productProxy.salesReportsVendor(1);
+        log.info("returned data from proxy successfully");
 
         Map<String, String> parameters = new HashMap();
 
-        parameters.put("createdBy", "sony");
+        parameters.put("createdBy", "test");
 
         String pathname = "E:\\MUM\\9-PM\\0-git-repo\\Goshop-backend\\report\\src\\main\\resources\\templates\\viewSalesReportsLive.jrxml";
         try {
