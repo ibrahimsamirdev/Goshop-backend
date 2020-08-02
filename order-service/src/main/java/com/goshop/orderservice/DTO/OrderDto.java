@@ -1,18 +1,18 @@
 package com.goshop.orderservice.DTO;
 
-import java.util.List;
+import java.util.Set;
 
-public class orderDto {
+public class OrderDto {
     private long userId;
     private long paymentId;
     private long addressId;
     private double totalAmount;
-    private List<productDto> productDtos;
+    private Set<ProductDto> ProductDtos;
 
-    public orderDto(){
+    public OrderDto(){
     }
 
-    public orderDto(long userId, long paymentId, long addressId, double totalAmount, List<productDto> productDtos) {
+    public OrderDto(long userId, long paymentId, long addressId, double totalAmount, Set<ProductDto> ProductDtos) {
         this.userId = userId;
         this.paymentId = paymentId;
         this.addressId = addressId;
@@ -51,11 +51,11 @@ public class orderDto {
         this.totalAmount = totalAmount;
     }
 
-    public List<productDto> getProductDtos() {
-        return productDtos;
+    public Set<ProductDto> getProductDtos() {
+        return ProductDtos;
     }
 
-    public void setProductDtos(List<productDto> productDtos) {
-        this.productDtos = productDtos;
+    public void setProductDtos(Set<ProductDto> ProductDtos) {
+        this.ProductDtos = ProductDtos;
     }
 }

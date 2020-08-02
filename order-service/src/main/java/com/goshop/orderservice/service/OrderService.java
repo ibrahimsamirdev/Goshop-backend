@@ -9,4 +9,5 @@ import java.util.Set;
 public interface OrderService {
     public Set<Orders> getOrders(long userId);
     public Optional<Orders> getOrder(long orderId);
+    public Orders addOrder(Orders orders);
 }

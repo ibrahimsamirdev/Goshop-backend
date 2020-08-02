@@ -12,18 +12,23 @@ public class OrderDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "orders_id",nullable = false)
+    @JoinColumn(name = "orders_id")
     private Orders orders;
     private long productId;
     private double price;
     private int quantity;
 
-    public long getId() {
-        return id;
+    public OrderDetails(){
     }
 
-    public void setId(long id) {
-        id = id;
+    public OrderDetails(long productId, double price, int quantity) {
+        this.productId = productId;
+        this.price = price;
+        this.quantity = quantity;
+    }
+
+    public long getId() {
+        return id;
     }
 
 //    public Orders getOrders() {

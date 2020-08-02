@@ -19,12 +19,19 @@ public class Orders {
     @OneToMany(mappedBy = "orders", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<OrderDetails> orderDetails;
 
-    public long getId() {
-        return id;
+    public Orders(){
     }
 
-    public void setId(long id) {
-        id = id;
+    public Orders(long userId, double totalAmount, long addressId, long paymentId, Set<OrderDetails> orderDetails) {
+        this.userId = userId;
+        this.totalAmount = totalAmount;
+        this.addressId = addressId;
+        this.paymentId = paymentId;
+        this.orderDetails = orderDetails;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public long getUserId() {

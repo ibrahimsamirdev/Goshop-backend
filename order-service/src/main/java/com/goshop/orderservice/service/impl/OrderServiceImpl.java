@@ -26,4 +26,8 @@ public class OrderServiceImpl implements OrderService {
         return orderRepository.findById(orderId);
     }
 
+    public Orders addOrder(Orders orders){
+        return orderRepository.save(orders);
+    }
+
 }
