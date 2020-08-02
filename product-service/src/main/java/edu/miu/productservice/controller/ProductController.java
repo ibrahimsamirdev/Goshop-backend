@@ -66,6 +66,7 @@ public class ProductController {
 		headers.add("Number of Blocks returned", String.valueOf(products.size()));
 
 		return new ResponseEntity<List<Product>>(products, headers, HttpStatus.OK);
+		
 	}
 
 	@GetMapping(value = "/{productId}")
