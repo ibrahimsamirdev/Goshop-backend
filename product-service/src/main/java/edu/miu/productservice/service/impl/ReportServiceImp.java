@@ -1,7 +1,6 @@
 package edu.miu.productservice.service.impl;
 
 
-import edu.miu.productservice.dto.ReportProductDto;
 import edu.miu.productservice.model.Product;
 import edu.miu.productservice.repository.ProductRepository;
 import edu.miu.productservice.service.ReportService;
@@ -11,7 +10,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
@@ -21,7 +19,7 @@ public class ReportServiceImp implements ReportService {
     ProductRepository productRepository;
 
     @Override
-    public List <Product> getReportProduct(Long id) {
+    public List<Product> getReportProduct(Long id) {
         return productRepository.findRProductsByVendorId(id);
     }
 }

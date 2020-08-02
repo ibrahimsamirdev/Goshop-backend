@@ -1,5 +1,6 @@
 package com.goshop.report.service.Imp;
 
+import com.goshop.report.dto.ReportProductDto;
 import com.goshop.report.model.Employee;
 import com.goshop.report.service.CreateReport;
 import net.sf.jasperreports.engine.*;
@@ -21,6 +22,21 @@ public class CreateReportImp implements CreateReport {
     @Override
     public HttpServletResponse createPdfReport(HttpServletResponse response, List<Employee> dataList, Map parameters, String pathname) throws IOException, JRException {
 
+        // Fetching the .jrxml file from the folder.
+        // final InputStream stream = this.getClass().getResourceAsStream("\\templates\\test.jrxml");
+        final InputStream stream = new FileInputStream(new File(pathname));
+        JasperDesign jasperDesign = JRXmlLoader.load(stream);
+        // Compile the Jasper report from .jrxml to .japser
+        final JasperReport report = JasperCompileManager.compileReport(jasperDesign);
+        // creating datasource from bean list
+        JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(dataList);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(report, parameters, beanColDataSource);
+        JasperExportManager.exportReportToPdfStream(jasperPrint, response.getOutputStream());
+        return response;
+    }
+
+    @Override
+    public HttpServletResponse createPdfReportSalesVendor(HttpServletResponse response, List<ReportProductDto> dataList, Map parameters, String pathname) throws IOException, JRException {
         // Fetching the .jrxml file from the folder.
         // final InputStream stream = this.getClass().getResourceAsStream("\\templates\\test.jrxml");
         final InputStream stream = new FileInputStream(new File(pathname));

@@ -1,14 +1,14 @@
 package com.goshop.report.Controller;
 
-import com.goshop.report.model.Employee;
+import com.goshop.report.dto.ReportProductDto;
 import com.goshop.report.service.CreateReport;
-import com.goshop.report.service.EmployeeService;
+import com.goshop.report.feignproxy.ProductProxy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
@@ -16,33 +16,33 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Controller
+@RestController
 @RequestMapping(value = "/api")
-public class EmployeeController {
+public class salesReportsVendorController {
 
     final Logger log = LoggerFactory.getLogger(this.getClass());
     final ModelAndView model = new ModelAndView();
 
-    @Autowired
-    EmployeeService eservice;
 
     @Autowired
     CreateReport createReport;
 
+    @Autowired
+    ProductProxy productProxy;
 
-
-    @GetMapping(value = "/serviceTest")
+    @GetMapping(value = "/ReportSales")
     public void getDocumentnew(HttpServletResponse response) {
         log.info("Preparing the pdf report via jasper.");
 
-        List<Employee> dataList = eservice.findAll();
-        Map <String,String> parameters = new HashMap();
+       List<ReportProductDto>reportProductDtos=  productProxy.salesReportsVendor(1);
 
-        parameters.put("createdBy","sony");
+        Map<String, String> parameters = new HashMap();
 
-        String pathname = "E:\\MUM\\9-PM\\0-git-repo\\Goshop-backend\\report\\src\\main\\resources\\templates\\viewSalesReports.jrxml";
+        parameters.put("createdBy", "sony");
+
+        String pathname = "E:\\MUM\\9-PM\\0-git-repo\\Goshop-backend\\report\\src\\main\\resources\\templates\\viewSalesReportsLive.jrxml";
         try {
-            response = createReport.createPdfReport(response, dataList, parameters, pathname);
+            response = createReport.createPdfReportSalesVendor(response, reportProductDtos, parameters, pathname);
             log.info("Report create in response successfully saved at response.");
 
         } catch (final Exception e) {
@@ -52,5 +52,4 @@ public class EmployeeController {
         response.setContentType("application/pdf");
         response.addHeader("Content-Disposition", "inline; filename=jasper.pdf;");
     }
-
 }
