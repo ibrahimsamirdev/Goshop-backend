@@ -1,8 +1,12 @@
 package edu.miu.productservice.controller;
 
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
+import edu.miu.productservice.model.Category;
 import edu.miu.productservice.model.Product;
+import edu.miu.productservice.model.Promotion;
 import edu.miu.productservice.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -21,11 +25,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/product")
 public class ProductController {
-	
+
 	@Autowired
-    ProductService productService;
-	
-	
+	ProductService productService;
+
+
 	@PostMapping(value = "/")
 	public ResponseEntity<Product> addProduct(@RequestBody Product product) {
 
@@ -41,11 +45,18 @@ public class ProductController {
 		return new ResponseEntity<Product>(product, headers, HttpStatus.CREATED);
 
 	}
-	
+	//ResponseEntity<List<Product>>
 	@GetMapping(value = "/")
 	public ResponseEntity<List<Product>> getProducts(){
-		
+
 		HttpHeaders headers = new HttpHeaders();
+
+		Product p = new Product(new Category("Fridge","Haier"),"Refridgerator","small size",100.00, new Date(),"15 inch","image/fridge",50,true,false, null);
+		p.setPromotions(
+				Arrays.asList(
+						new Promotion("Christmas Promotion",new Date(2020,12,01),new Date(2020,12,30),0.25),
+						new Promotion("Easter Promotion",new Date(2020,03,01),new Date(2020,04,04),0.15)
+				));
 
 		List<Product> products = productService.getProducts();
 
@@ -56,7 +67,7 @@ public class ProductController {
 
 		return new ResponseEntity<List<Product>>(products, headers, HttpStatus.OK);
 	}
-	
+
 	@GetMapping(value = "/{productId}")
 	public ResponseEntity<Product> getProduct(@PathVariable long productId) {
 
@@ -69,32 +80,40 @@ public class ProductController {
 
 		return new ResponseEntity<Product>(product, HttpStatus.OK);
 	}
-	
+
 	@PutMapping(value="/{productId}")
 	public ResponseEntity<Product> editProduct(@PathVariable long productId,@RequestBody Product product){
-		
+
 		HttpHeaders headers = new HttpHeaders();
 		Product product_toEdit = productService.getProduct(productId);
-		
+
 		if(product_toEdit == null) {
-			
+
 			return new ResponseEntity<Product>(HttpStatus.NOT_FOUND);
 		}
-		
+
 		productService.editProduct(productId, product);
-		
+
 		headers.add("Updated Block : ",String.valueOf(productId));
-		
+
 		return new ResponseEntity<Product>(product,headers, HttpStatus.OK);
 	}
-	
-	
-	@DeleteMapping(value="/{productId}")
-	public ResponseEntity<Void> deleteProduct(@PathVariable long productId){
 
-		productService.deleteProduct(productId);
-		
-		return  ResponseEntity.noContent().build();
+
+	@DeleteMapping(value="/{productId}")
+	public Product deleteProduct(@PathVariable long productId){
+
+		return productService.deleteProduct(productId);
+
+
 	}
+
+	@PostMapping(value="/{productId}/{soldAmount}")
+	public Product updateStock(@PathVariable long soldAmount, @PathVariable long productId){
+
+		return productService.updateStock(soldAmount,productId);
+	}
+
+
 
 }

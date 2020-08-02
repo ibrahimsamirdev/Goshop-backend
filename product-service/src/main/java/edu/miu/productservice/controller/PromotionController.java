@@ -88,11 +88,9 @@ public class PromotionController {
 	
 	
 	@DeleteMapping(value="/{promotionId}")
-	public ResponseEntity<Void> deletePromotion(@PathVariable long promotionId){
+	public Promotion deletePromotion(@PathVariable long promotionId){
 
-		promotionService.deletePromotion(promotionId);
-		
-		return  ResponseEntity.noContent().build();
+		return  promotionService.deletePromotion(promotionId);
 	}
 
 }

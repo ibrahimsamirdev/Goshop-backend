@@ -45,7 +45,7 @@ public class PromotionServiceImpl implements PromotionService {
 		Promotion promotion = promotionRepository.findById(promotionID).orElseThrow(() -> 
 		new NoSuchResourceException("No Promotion found with", promotionID));
 		
-		promotion.setProduct(update_promotion.getProduct());
+//		promotion.setProduct(update_promotion.getProduct());
 		promotion.setStartDate(update_promotion.getStartDate());
 		promotion.setEndDate(update_promotion.getEndDate());
 		promotion.setDiscount(update_promotion.getDiscount());
@@ -55,13 +55,13 @@ public class PromotionServiceImpl implements PromotionService {
 	}
 
 	@Override
-	public ResponseEntity<Void> deletePromotion(long promotionId) throws NoSuchResourceException {
+	public Promotion deletePromotion(long promotionId) throws NoSuchResourceException {
 		Promotion promotion = promotionRepository.findById(promotionId)
 				.orElseThrow(() -> new NoSuchResourceException("No Promotion found  with", promotionId));
 
-		promotionRepository.delete(promotion);
+		promotion.setDeleted(true);
 
-		return ResponseEntity.noContent().build();
+		return promotionRepository.save(promotion);
 	}
 
 	
