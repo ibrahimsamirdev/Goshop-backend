@@ -1,6 +1,6 @@
 package com.goshop.orderservice.repository;
 
-import com.goshop.orderservice.model.Order;
+import com.goshop.orderservice.model.Orders;
 import com.goshop.orderservice.model.OrderDetails;
 import feign.Param;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,5 +13,5 @@ import java.util.Optional;
 public interface OrderDetailsRepository extends JpaRepository<OrderDetails,Long> {
 
     @Query("SELECT d.id,d.price,d.quantity from OrderDetails d where d.productId=:id")
-    Optional<Order> findProductIdById(@Param("id") Long id);
+    Optional<Orders> findProductIdById(@Param("id") Long id);
 }
