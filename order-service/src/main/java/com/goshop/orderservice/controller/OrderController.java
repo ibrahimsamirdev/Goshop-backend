@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/order")
@@ -16,24 +17,19 @@ public class OrderController {
 
     @Autowired
     OrderService orderService;
-//    @GetMapping("user/{userId}")
-//    public ResponseEntity<List<Order>> getOrders(@PathVariable String userId){
-//
-//
-//        HttpHeaders headers = new HttpHeaders();
-//
-//        List<Order> orders=orderService.getOrders(Long.parseLong(userId));
-//
-//
-//        if (orders == null || orders.isEmpty()) {
-//            return new ResponseEntity<List<Order>>(HttpStatus.NOT_FOUND);
-//        }
-//        System.out.println("Order " + orders.get(0).toString() );
-//
-//        headers.add("Number of Blocks returned", "22");
-//        return new ResponseEntity<List<Order>>(orders, HttpStatus.OK);
-//
-//    }
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<Set<Orders>> getOrders(@PathVariable String userId){
+
+        HttpHeaders headers = new HttpHeaders();
+        Set<Orders> orders=orderService.getOrders(Long.parseLong(userId));
+
+        if (orders == null || orders.isEmpty()) {
+            return new ResponseEntity<Set<Orders>>(HttpStatus.NOT_FOUND);
+        }
+
+        headers.add("Number of Orders returned", String.valueOf(orders.size()));
+        return new ResponseEntity<Set<Orders>>(orders, HttpStatus.OK);
+    }
 
 
     @GetMapping(value = "/{orderId}")
@@ -47,4 +43,8 @@ public class OrderController {
         System.out.println("Order " + order.get() );
         return new ResponseEntity<Object>(order.get(),HttpStatus.OK);
     }
+
+
+
+
 }
