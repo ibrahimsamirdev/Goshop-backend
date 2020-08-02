@@ -33,7 +33,7 @@ public class UserController {
 	 * 
 	 * @return List of User objects
 	 */
-	@GetMapping("/")
+	@GetMapping()
 	public ResponseEntity<Object> getAllUsers() {
 		List<User> users = userService.getAll();
 		return new ResponseEntity<Object>(users, HttpStatus.OK);
@@ -69,7 +69,7 @@ public class UserController {
 	 * @param user - the user to be updated
 	 * @return string "success"
 	 */
-	@PutMapping("/")
+	@PutMapping()
 	public ResponseEntity<Object> updateUser(@RequestBody User user) {
 		userService.updateUser(user);
 		return new ResponseEntity<Object>("success", HttpStatus.OK);

@@ -38,15 +38,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<User> getByRole(RoleType role) {
-		System.out.println("============================*************");
 		return userRepo.findByRole(role);
 	}
-
-//	@Override
-//	public List<User> getByRoleId(long roleId) {
-//		System.out.println("============================*************");
-////		return userRepo.findByMobile("1234");
-//		return userRepo.findByIsSubscribed(false);
-//	}
 
 }
