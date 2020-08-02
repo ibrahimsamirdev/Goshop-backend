@@ -1,8 +1,11 @@
 package com.goshop.service;
 
-import org.springframework.stereotype.Service;
+import java.util.List;
 
+import com.goshop.model.User;
 
 public interface UserService {
+
+	List<User> getAll();
 
 }
