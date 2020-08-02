@@ -3,11 +3,15 @@ package edu.miu.productservice.model;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Promotion {
-	
+
 	@Id
 	@GeneratedValue
 	private long id;
@@ -16,12 +20,16 @@ public class Promotion {
 	private Date startDate;
 	private Date endDate;
 	private double discount;
+	private boolean isDeleted;
+
+
+
 	//vendor id;
 	public Promotion() {
 		super();
-		
+
 	}
-	
+
 	public Promotion(String title, Date startDate, Date endDate, double discount) {
 		super();
 		this.title = title;
@@ -66,9 +74,14 @@ public class Promotion {
 	public void setDiscount(double discount) {
 		this.discount = discount;
 	}
-	
-	
 
-	
-	
+	public boolean isDeleted() {
+		return isDeleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		isDeleted = deleted;
+	}
+
+
 }

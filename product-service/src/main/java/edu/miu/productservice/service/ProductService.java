@@ -13,5 +13,5 @@ public interface ProductService {
 
 	public Product editProduct(long productID, Product edit_product);
 	public Product deleteProduct(long productId) throws NoSuchResourceException;
-
+    public Product updateStock(long soldAmount,long productID);
 }

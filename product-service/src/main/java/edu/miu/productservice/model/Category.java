@@ -1,21 +1,24 @@
 package edu.miu.productservice.model;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Category {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
+
     private String name;
-	
+
+
+
 	private  String description;
 
-	@OneToMany(mappedBy = "product")
-	private List<Product> products;
+	private boolean isDeleted;
 
 	public Category() {
 		super();
@@ -27,7 +30,7 @@ public class Category {
 		this.name = name;
 		this.description = description;
 	}
-	
+
 
 	public long getId() {
 		return id;
@@ -48,19 +51,18 @@ public class Category {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
 	public void setId(long id) {
 		this.id = id;
 	}
 
-	public List<Product> getProducts() {
-		return products;
+	public boolean getIsDeleted() {
+		return isDeleted;
 	}
 
-	public void setProducts(List<Product> products) {
-		this.products = products;
+	public void setIsDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
 	}
-	
-	
+
+
 
 }

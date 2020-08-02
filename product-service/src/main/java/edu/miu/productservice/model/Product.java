@@ -9,28 +9,28 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 public class Product {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
+
 	@ManyToOne
 	@JoinTable(name = "category_product")
 //	@Valid
 //	@NotNull
 	private Category category;
-	
+
 	private String title;
 	private String description;
 	private double price;
-	
+
 	@Temporal(TemporalType.DATE)
 	@NotNull
 	private Date creationDate;
 	private String attributes;
 	//vendor Id
 	private String imageUrl;
-	private int stockAmount;
+	private long stockAmount;
 	private boolean isPublished;
 	private boolean isDeleted;
 
@@ -46,7 +46,7 @@ public class Product {
 
 
 	public Product(@Valid @NotNull Category category, String title, String description, double price, Date creationDate,
-				   String attributes, String imageUrl, int stockAmount, boolean isPublished, boolean isDeleted, List<Promotion> promotions) {
+				   String attributes, String imageUrl, long stockAmount, boolean isPublished, boolean isDeleted, List<Promotion> promotions) {
 		super();
 		this.category = category;
 		this.title = title;
@@ -125,11 +125,11 @@ public class Product {
 		this.imageUrl = imageUrl;
 	}
 
-	public int getStockAmount() {
+	public long getStockAmount() {
 		return stockAmount;
 	}
 
-	public void setStockAmount(int stockAmount) {
+	public void setStockAmount(long stockAmount) {
 		this.stockAmount = stockAmount;
 	}
 
@@ -156,7 +156,7 @@ public class Product {
 	public void setPromotions(List<Promotion> promotions) {
 		this.promotions = promotions;
 	}
-	
+
 	
 	
 	

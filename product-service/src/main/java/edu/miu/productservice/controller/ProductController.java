@@ -1,6 +1,5 @@
 package edu.miu.productservice.controller;
 
-import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -26,11 +25,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/product")
 public class ProductController {
-	
+
 	@Autowired
-    ProductService productService;
-	
-	
+	ProductService productService;
+
+
 	@PostMapping(value = "/")
 	public ResponseEntity<Product> addProduct(@RequestBody Product product) {
 
@@ -62,13 +61,13 @@ public class ProductController {
 		List<Product> products = productService.getProducts();
 
 		if (products == null) {
-			//return new ResponseEntity<List<Product>>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<List<Product>>(HttpStatus.NOT_FOUND);
 		}
 		headers.add("Number of Blocks returned", String.valueOf(products.size()));
 
 		return new ResponseEntity<List<Product>>(products, headers, HttpStatus.OK);
 	}
-	
+
 	@GetMapping(value = "/{productId}")
 	public ResponseEntity<Product> getProduct(@PathVariable long productId) {
 
@@ -81,32 +80,40 @@ public class ProductController {
 
 		return new ResponseEntity<Product>(product, HttpStatus.OK);
 	}
-	
+
 	@PutMapping(value="/{productId}")
 	public ResponseEntity<Product> editProduct(@PathVariable long productId,@RequestBody Product product){
-		
+
 		HttpHeaders headers = new HttpHeaders();
 		Product product_toEdit = productService.getProduct(productId);
-		
+
 		if(product_toEdit == null) {
-			
+
 			return new ResponseEntity<Product>(HttpStatus.NOT_FOUND);
 		}
-		
+
 		productService.editProduct(productId, product);
-		
+
 		headers.add("Updated Block : ",String.valueOf(productId));
-		
+
 		return new ResponseEntity<Product>(product,headers, HttpStatus.OK);
 	}
-	
-	
+
+
 	@DeleteMapping(value="/{productId}")
 	public Product deleteProduct(@PathVariable long productId){
 
 		return productService.deleteProduct(productId);
-		
+
 
 	}
+
+	@PostMapping(value="/{productId}/{soldAmount}")
+	public Product updateStock(@PathVariable long soldAmount, @PathVariable long productId){
+
+		return productService.updateStock(soldAmount,productId);
+	}
+
+
 
 }
