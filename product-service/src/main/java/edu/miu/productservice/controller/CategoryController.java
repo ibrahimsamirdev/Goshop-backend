@@ -1,7 +1,9 @@
 package edu.miu.productservice.controller;
 
-import com.goshop.productservice.model.Category;
-import com.goshop.productservice.service.CategoryService;
+//import com.goshop.productservice.model.Category;
+//import com.goshop.productservice.service.CategoryService;
+import edu.miu.productservice.model.Category;
+import edu.miu.productservice.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -84,10 +86,10 @@ public class CategoryController {
 
 
     @DeleteMapping(value="/{categoryId}")
-    public ResponseEntity<Void> deleteCategory(@PathVariable long categoryId){
+    public Category deleteCategory(@PathVariable long categoryId){
 
-        categoryService.deleteCategory(categoryId);
 
-        return  ResponseEntity.noContent().build();
+
+        return  categoryService.deleteCategory(categoryId);
     }
 }
