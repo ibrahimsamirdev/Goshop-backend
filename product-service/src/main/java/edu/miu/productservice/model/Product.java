@@ -39,14 +39,17 @@ public class Product {
 	private String imageUrl;
 	private int stockAmount;
 	private boolean isPublished;
-	
+	private int SoldAmount;
+
+
+
 	public Product() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	public Product(@Valid @NotNull Category category, String title, String description, double price, Date creationDate,
-			String attributes, String imageUrl, int stockAmount, boolean isPublished) {
+			String attributes, String imageUrl, int stockAmount, boolean isPublished,int soldAmount) {
 		super();
 		this.category = category;
 		this.title = title;
@@ -57,6 +60,7 @@ public class Product {
 		this.imageUrl = imageUrl;
 		this.stockAmount = stockAmount;
 		this.isPublished = isPublished;
+		this.SoldAmount= soldAmount;
 	}
 
 	public Category getCategory() {
@@ -130,9 +134,15 @@ public class Product {
 	public void setPublished(boolean isPublished) {
 		this.isPublished = isPublished;
 	}
-	
-	
-	
+
+
+	public int getSoldAmount() {
+		return SoldAmount;
+	}
+
+	public void setSoldAmount(int soldAmount) {
+		SoldAmount = soldAmount;
+	}
 	
 	
 	
