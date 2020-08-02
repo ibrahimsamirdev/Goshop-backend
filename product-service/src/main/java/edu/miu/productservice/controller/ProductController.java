@@ -1,8 +1,13 @@
 package edu.miu.productservice.controller;
 
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
+import edu.miu.productservice.model.Category;
 import edu.miu.productservice.model.Product;
+import edu.miu.productservice.model.Promotion;
 import edu.miu.productservice.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -41,16 +46,23 @@ public class ProductController {
 		return new ResponseEntity<Product>(product, headers, HttpStatus.CREATED);
 
 	}
-	
+	//ResponseEntity<List<Product>>
 	@GetMapping(value = "/")
 	public ResponseEntity<List<Product>> getProducts(){
-		
+
 		HttpHeaders headers = new HttpHeaders();
+
+		Product p = new Product(new Category("Fridge","Haier"),"Refridgerator","small size",100.00, new Date(),"15 inch","image/fridge",50,true,false, null);
+		p.setPromotions(
+				Arrays.asList(
+						new Promotion("Christmas Promotion",new Date(2020,12,01),new Date(2020,12,30),0.25),
+						new Promotion("Easter Promotion",new Date(2020,03,01),new Date(2020,04,04),0.15)
+				));
 
 		List<Product> products = productService.getProducts();
 
 		if (products == null) {
-			return new ResponseEntity<List<Product>>(HttpStatus.NOT_FOUND);
+			//return new ResponseEntity<List<Product>>(HttpStatus.NOT_FOUND);
 		}
 		headers.add("Number of Blocks returned", String.valueOf(products.size()));
 
@@ -90,11 +102,11 @@ public class ProductController {
 	
 	
 	@DeleteMapping(value="/{productId}")
-	public ResponseEntity<Void> deleteProduct(@PathVariable long productId){
+	public Product deleteProduct(@PathVariable long productId){
 
-		productService.deleteProduct(productId);
+		return productService.deleteProduct(productId);
 		
-		return  ResponseEntity.noContent().build();
+
 	}
 
 }

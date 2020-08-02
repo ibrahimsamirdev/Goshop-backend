@@ -55,19 +55,21 @@ public class ProdcutServiceImpl implements ProductService {
 		product.setTitle(edit_product.getTitle());
 		product.setPublished(edit_product.isPublished());
 		product.setStockAmount(edit_product.getStockAmount());
+		product.setDeleted(edit_product.isDeleted());
 		
 		
 		return productRepository.save(product);
 	}
 	
 	@Override
-	public ResponseEntity<Void> deleteProduct(long productID) throws NoSuchResourceException {
+	public Product deleteProduct(long productID) throws NoSuchResourceException {
 		Product product = productRepository.findById(productID)
-				.orElseThrow(() -> new NoSuchResourceException("No Prodcut found  with", productID));
+				.orElseThrow(() -> new NoSuchResourceException("No Product found  with", productID));
 
-		productRepository.delete(product);
+		product.setDeleted(true);
+		productRepository.save(product);
 
-		return ResponseEntity.noContent().build();
+		return productRepository.save(product);
 	}
 
 

@@ -3,11 +3,7 @@ package edu.miu.productservice.model;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 
 @Entity
 public class Promotion {
@@ -15,11 +11,7 @@ public class Promotion {
 	@Id
 	@GeneratedValue
 	private long id;
-	
-	@ManyToMany
-	@JoinTable(name="promotion_product")
-	private List<Product> product;
-	
+
 	private String  title;
 	private Date startDate;
 	private Date endDate;
@@ -30,9 +22,8 @@ public class Promotion {
 		
 	}
 	
-	public Promotion(List<Product> product, String title, Date startDate, Date endDate, double discount) {
+	public Promotion(String title, Date startDate, Date endDate, double discount) {
 		super();
-		this.product = product;
 		this.title = title;
 		this.startDate = startDate;
 		this.endDate = endDate;
@@ -40,13 +31,16 @@ public class Promotion {
 	}
 
 
-	public List<Product> getProduct() {
-		return product;
+
+
+	public long getId() {
+		return id;
 	}
 
-	public void setProduct(List<Product> product) {
-		this.product = product;
+	public void setId(long id) {
+		this.id = id;
 	}
+
 
 	public String getTitle() {
 		return title;

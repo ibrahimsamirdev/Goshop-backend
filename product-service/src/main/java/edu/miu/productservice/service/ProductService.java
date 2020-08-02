@@ -12,6 +12,6 @@ public interface ProductService {
 	public List<Product> getProducts();
 
 	public Product editProduct(long productID, Product edit_product);
-	public ResponseEntity<Void> deleteProduct(long productId) throws NoSuchResourceException;
+	public Product deleteProduct(long productId) throws NoSuchResourceException;
 
 }

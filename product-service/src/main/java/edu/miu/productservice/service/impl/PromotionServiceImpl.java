@@ -44,8 +44,7 @@ public class PromotionServiceImpl implements PromotionService {
 	public Promotion updatePromotion(long promotionID, Promotion update_promotion) {
 		Promotion promotion = promotionRepository.findById(promotionID).orElseThrow(() -> 
 		new NoSuchResourceException("No Promotion found with", promotionID));
-		
-		promotion.setProduct(update_promotion.getProduct());
+
 		promotion.setStartDate(update_promotion.getStartDate());
 		promotion.setEndDate(update_promotion.getEndDate());
 		promotion.setDiscount(update_promotion.getDiscount());
