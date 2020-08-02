@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -46,6 +48,18 @@ public class UserController {
 	public ResponseEntity<Object> getUserById(@PathVariable long id) {
 		User user = userService.getById(id);
 		return new ResponseEntity<Object>(user, HttpStatus.OK);
+	}
+
+	/**
+	 * Update User
+	 * 
+	 * @param user - the user to be updated
+	 * @return string "success"
+	 */
+	@PutMapping("/")
+	public ResponseEntity<Object> updateUser(@RequestBody User user) {
+		userService.updateUser(user);
+		return new ResponseEntity<Object>("success", HttpStatus.OK);
 	}
 
 }

@@ -27,4 +27,12 @@ public class UserServiceImpl implements UserService {
 		return userRepo.findById(id).orElseThrow(() -> new CustomException("User Not Found", HttpStatus.NOT_FOUND));
 	}
 
+	@Override
+	public void updateUser(User user) {
+		if (!userRepo.existsById(user.getId())) {
+			throw new CustomException("User Doesn't Exist", HttpStatus.NOT_FOUND);
+		}
+		userRepo.save(user);
+	}
+
 }

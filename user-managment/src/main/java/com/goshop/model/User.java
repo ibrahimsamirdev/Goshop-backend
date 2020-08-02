@@ -19,8 +19,8 @@ public class User {
 	private String pass;
 	private String mobile;
 	private Boolean isSubscribed;
-//    @OneToMany(mappedBy = "user")
-//    private Set<Address> addresses;
+//	@OneToMany(mappedBy = "user")
+//	private Set<Address> addresses;
 	@ManyToOne
 	@JoinColumn(name = "role_id")
 	private Role role;
