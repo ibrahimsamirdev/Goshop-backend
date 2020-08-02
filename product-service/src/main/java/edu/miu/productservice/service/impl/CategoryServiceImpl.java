@@ -16,7 +16,6 @@ import java.util.List;
 @Transactional(propagation = Propagation.REQUIRED)
 public class CategoryServiceImpl implements CategoryService {
 
-
     @Autowired
     CategoryRepository categoryRepository;
 
@@ -45,7 +44,7 @@ public class CategoryServiceImpl implements CategoryService {
     public Category editCategory(long categoryId, Category edit_category) {
 
         Category category = categoryRepository.findById(categoryId).orElseThrow(() ->
-                new  NoSuchResourceException("No category found  with" , categoryId));
+                new NoSuchResourceException("No category found  with" , categoryId));
 
         category.setDescription(edit_category.getDescription());
         category.setName(edit_category.getName());
@@ -54,13 +53,14 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public ResponseEntity<Void> deleteCategory(long categoryId) throws NoSuchResourceException {
+    public Category deleteCategory(long categoryId) throws NoSuchResourceException {
         Category category = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new NoSuchResourceException("No category found  with", categoryId));
 
-        categoryRepository.delete(category);
+        category.setIsDeleted(true);
 
-        return ResponseEntity.noContent().build();
+
+        return categoryRepository.save(category);
     }
 
 }

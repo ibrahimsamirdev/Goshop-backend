@@ -12,11 +12,10 @@ public class User {
     private String name;
     @Column(unique = true, length = 250)
     private String email;
-    private String pass;
+    private String password;
     private String mobile;
     private Boolean isSubscribed;
-    @OneToMany
-    private Set<Address> addresses;
+
     @ManyToOne
     @JoinColumn(name= "role_id")
     private Role role;
@@ -45,12 +44,12 @@ public class User {
         this.email = email;
     }
 
-    public String getPass() {
-        return pass;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPass(String pass) {
-        this.pass = pass;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getMobile() {
@@ -67,14 +66,6 @@ public class User {
 
     public void setSubscribed(Boolean subscribed) {
         isSubscribed = subscribed;
-    }
-
-    public Set<Address> getAddresses() {
-        return addresses;
-    }
-
-    public void setAddresses(Set<Address> addresses) {
-        this.addresses = addresses;
     }
 
     public Role getRole() {

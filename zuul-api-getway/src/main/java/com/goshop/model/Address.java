@@ -1,8 +1,6 @@
 package com.goshop.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Address {
@@ -15,6 +13,9 @@ public class Address {
     private String street;
     private int zipcode;
     private AddressType type;
+    @ManyToOne
+    @JoinColumn(name ="user_id")
+    private User user;
 
     public long getId() {
         return id;
@@ -62,5 +63,13 @@ public class Address {
 
     public void setType(AddressType type) {
         this.type = type;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
