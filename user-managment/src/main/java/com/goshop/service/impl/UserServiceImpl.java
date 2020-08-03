@@ -51,4 +51,15 @@ public class UserServiceImpl implements UserService {
 		return userRepo.findByRole(role);
 	}
 
+	@Override
+	public void paySubscription(long id) {
+		User user = userRepo.findById(id)
+				.orElseThrow(() -> new CustomException("User Not Found", HttpStatus.NOT_FOUND));
+		if (user.getSubscribed()) {
+			throw new CustomException("User already subscriped", HttpStatus.NOT_ACCEPTABLE);
+		}
+		user.setSubscribed(true);
+		userRepo.save(user);
+	}
+
 }

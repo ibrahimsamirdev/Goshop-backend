@@ -89,4 +89,16 @@ public class UserController {
 		return new ResponseEntity<Object>("user deleted successfully", HttpStatus.OK);
 	}
 
+	/**
+	 * Pay User (vendor) subscription
+	 * 
+	 * @param id - user id
+	 * @return string "success"
+	 */
+	@PutMapping("/pay/{id}")
+	public ResponseEntity<Object> paySubscription(@PathVariable long id) {
+		userService.paySubscription(id);
+		return new ResponseEntity<Object>("success", HttpStatus.OK);
+	}
+
 }

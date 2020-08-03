@@ -19,4 +19,6 @@ public interface UserService {
 
 	List<User> getByRole(RoleType role);
 
+	void paySubscription(long id);
+
 }
