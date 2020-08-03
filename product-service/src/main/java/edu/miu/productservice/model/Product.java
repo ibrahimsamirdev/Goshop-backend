@@ -1,55 +1,52 @@
 package edu.miu.productservice.model;
 
 import java.util.Date;
+import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 @Entity
 public class Product {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "categoryId", nullable = false)
-	@Valid
-	@NotNull
+
+	@ManyToOne
+	@JoinTable(name = "category_product")
+//	@Valid
+//	@NotNull
 	private Category category;
-	
+
 	private String title;
 	private String description;
 	private double price;
-	
+
 	@Temporal(TemporalType.DATE)
 	@NotNull
 	private Date creationDate;
 	private String attributes;
-	//vendor Id
+	//private long vendorId;
 	private String imageUrl;
-	private int stockAmount;
+	private long stockAmount;
 	private boolean isPublished;
-	private int SoldAmount;
+	private boolean isDeleted;
 
-
+	@ManyToMany
+	@JoinTable
+	private List<Promotion> promotions;
 
 	public Product() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+
+
 	public Product(@Valid @NotNull Category category, String title, String description, double price, Date creationDate,
-			String attributes, String imageUrl, int stockAmount, boolean isPublished,int soldAmount) {
+				   String attributes, String imageUrl, long stockAmount, boolean isPublished, boolean isDeleted, List<Promotion> promotions) {
 		super();
 		this.category = category;
 		this.title = title;
@@ -60,7 +57,16 @@ public class Product {
 		this.imageUrl = imageUrl;
 		this.stockAmount = stockAmount;
 		this.isPublished = isPublished;
-		this.SoldAmount= soldAmount;
+		this.isDeleted = isDeleted;
+		this.promotions = promotions;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public Category getCategory() {
@@ -119,11 +125,11 @@ public class Product {
 		this.imageUrl = imageUrl;
 	}
 
-	public int getStockAmount() {
+	public long getStockAmount() {
 		return stockAmount;
 	}
 
-	public void setStockAmount(int stockAmount) {
+	public void setStockAmount(long stockAmount) {
 		this.stockAmount = stockAmount;
 	}
 
@@ -135,14 +141,24 @@ public class Product {
 		this.isPublished = isPublished;
 	}
 
-
-	public int getSoldAmount() {
-		return SoldAmount;
+	public boolean isDeleted() {
+		return isDeleted;
 	}
 
-	public void setSoldAmount(int soldAmount) {
-		SoldAmount = soldAmount;
+	public void setDeleted(boolean deleted) {
+		isDeleted = deleted;
 	}
+
+	public List<Promotion> getPromotions() {
+		return promotions;
+	}
+
+	public void setPromotions(List<Promotion> promotions) {
+		this.promotions = promotions;
+	}
+
+	
+	
 	
 	
 	
