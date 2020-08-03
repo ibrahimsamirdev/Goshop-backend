@@ -25,21 +25,10 @@ public class UserController {
 
     @CrossOrigin("*")
     @PostMapping("/signin")
-//    @ResponseBody
     public ResponseEntity<Object> login(@RequestParam("email") String email, @RequestParam("password") String password) {
 
             String token = userService.login(email, password);
-//            HttpHeaders headers = new HttpHeaders();
-//            List<String> headerlist = new ArrayList<>();
-//            List<String> exposeList = new ArrayList<>();
-//            headerlist.add("Content-Type");
-//            headerlist.add(" Accept");
-//            headerlist.add("X-Requested-With");
-//            headerlist.add("Authorization");
-//            headers.setAccessControlAllowHeaders(headerlist);
-//            exposeList.add("Authorization");
-//            headers.setAccessControlExposeHeaders(exposeList);
-//            headers.set("Authorization", token);
+
             return new ResponseEntity<Object>(token, HttpStatus.CREATED);
 
 
@@ -47,9 +36,15 @@ public class UserController {
 
     @CrossOrigin("*")
     @PostMapping("/register")
-//    @ResponseBody
     public ResponseEntity<Object> signout(@RequestBody User user) {
         User u = userService.saveUser(user,RoleType.registeredUser);
+        return new ResponseEntity<Object>("success", HttpStatus.CREATED);
+    }
+
+    @CrossOrigin("*")
+    @PostMapping("/createUser")
+    public ResponseEntity<Object> createUser(@RequestBody User user) {
+        User u = userService.saveUser(user,user.getRole().getRole());
         return new ResponseEntity<Object>("success", HttpStatus.CREATED);
     }
 
