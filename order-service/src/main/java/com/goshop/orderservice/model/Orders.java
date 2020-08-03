@@ -1,6 +1,11 @@
 package com.goshop.orderservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -15,17 +20,37 @@ public class Orders {
     private double totalAmount;
     private long addressId;
     private long paymentId;
+    private Date creationDate;
 
-
-    @OneToMany(mappedBy = "orders", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties(value ={"orders"})
     private Set<OrderDetails> orderDetails;
+
+    public Orders(){
+        orderDetails = new HashSet<>();
+
+    }
+
+    public Orders(long userId, double totalAmount, long addressId, long paymentId, Set<OrderDetails> orderDetails, Date creationDate) {
+        this.userId = userId;
+        this.totalAmount = totalAmount;
+        this.addressId = addressId;
+        this.paymentId = paymentId;
+        this.orderDetails = orderDetails;
+        this.creationDate=creationDate;
+    }
+
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
 
     public long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        id = id;
     }
 
     public long getUserId() {
@@ -66,5 +91,13 @@ public class Orders {
 
     public void setOrderDetails(Set<OrderDetails> orderDetails) {
         this.orderDetails = orderDetails;
+        for (OrderDetails orderDetail : orderDetails) {
+            orderDetail.setOrders(this);
+        }
+    }
+
+    public Orders addOrderDetail(OrderDetails orderDetails){
+        this.orderDetails.add(orderDetails);
+        return this;
     }
 }
