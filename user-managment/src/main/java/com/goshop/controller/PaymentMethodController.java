@@ -72,7 +72,7 @@ public class PaymentMethodController {
 	}
 
 	/**
-	 * Delete payment method by Id
+	 * Delete payment method
 	 * 
 	 * @param id - payment method id
 	 * @return string "success"

@@ -1,11 +1,14 @@
 package edu.miu.productservice.model;
 
+
 import java.util.Date;
 import java.util.List;
+
 
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 @Entity
 public class Product {
@@ -28,9 +31,11 @@ public class Product {
 	@NotNull
 	private Date creationDate;
 	private String attributes;
-	//private long vendorId;
+	private long vendorId;
 	private String imageUrl;
 	private long stockAmount;
+	//for Order
+	private long soldAmount;
 	private boolean isPublished;
 	private boolean isDeleted;
 
@@ -117,6 +122,14 @@ public class Product {
 		this.attributes = attributes;
 	}
 
+	public long getVendorId() {
+		return vendorId;
+	}
+
+	public void setVendorId(long vendorId) {
+		this.vendorId = vendorId;
+	}
+
 	public String getImageUrl() {
 		return imageUrl;
 	}
@@ -133,12 +146,20 @@ public class Product {
 		this.stockAmount = stockAmount;
 	}
 
+	public long getSoldAmount() {
+		return soldAmount;
+	}
+
+	public void setSoldAmount(long soldAmount) {
+		this.soldAmount = soldAmount;
+	}
+
 	public boolean isPublished() {
 		return isPublished;
 	}
 
-	public void setPublished(boolean isPublished) {
-		this.isPublished = isPublished;
+	public void setPublished(boolean published) {
+		isPublished = published;
 	}
 
 	public boolean isDeleted() {
@@ -156,15 +177,4 @@ public class Product {
 	public void setPromotions(List<Promotion> promotions) {
 		this.promotions = promotions;
 	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 }
