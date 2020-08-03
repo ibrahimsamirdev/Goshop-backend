@@ -73,13 +73,17 @@ public class ProdcutServiceImpl implements ProductService {
 		return productRepository.save(product);
 	}
 
+	//Emad --- update for order operations
 	public Product updateStock(long soldAmount,long productID){
 		Product product = productRepository.findById(productID)
 				.orElseThrow(() -> new NoSuchResourceException("No Product found  with", productID));
 
-		long newStockAmount = product.getStockAmount() - soldAmount;
-		product.setStockAmount(newStockAmount);
+		long newSoldAmount = product.getSoldAmount() + soldAmount;
 
+		if(newSoldAmount>product.getStockAmount())
+			return  null;
+
+		product.setSoldAmount(newSoldAmount);
 
 		return productRepository.save(product);
 	}

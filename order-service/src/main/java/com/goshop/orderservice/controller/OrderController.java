@@ -1,6 +1,7 @@
 package com.goshop.orderservice.controller;
 
 import com.goshop.orderservice.DTO.OrderDto;
+import com.goshop.orderservice.feignproxy.ProductProxy;
 import com.goshop.orderservice.model.OrderDetails;
 import com.goshop.orderservice.model.Orders;
 import com.goshop.orderservice.service.OrderService;
@@ -24,6 +25,9 @@ public class OrderController {
 
     @Autowired
     ModelMapper modelMapper;
+
+    @Autowired
+    ProductProxy proxy;
 
     @GetMapping("/user/{userId}")
     public ResponseEntity<Set<OrderDto>> getOrders(@PathVariable String userId) {
@@ -93,6 +97,16 @@ public class OrderController {
         }
 
         Orders orders = convertToEntity(orderDto);
+        Set<OrderDetails> orderDetails=orders.getOrderDetails();
+        boolean done;
+        for(OrderDetails orderDetail:orderDetails){
+           done= proxy.updateStock(orderDetail.getProductId(),orderDetail.getQuantity());
+           if (!done){
+               return new ResponseEntity<OrderDto>(HttpStatus.BAD_REQUEST);
+           }
+        }
+//        System.out.println( "tttttttttttttttt"+proxy.testRest()) ;
+
         Orders createOrders = orderService.addOrder(orders);
         return new ResponseEntity<OrderDto>(convertToDto(createOrders), headers, HttpStatus.CREATED);
 

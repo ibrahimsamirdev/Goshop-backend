@@ -31,6 +31,8 @@ public class Product {
 	//private long vendorId;
 	private String imageUrl;
 	private long stockAmount;
+	//for Order
+	private long soldAmount;
 	private boolean isPublished;
 	private boolean isDeleted;
 
@@ -157,14 +159,11 @@ public class Product {
 		this.promotions = promotions;
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public long getSoldAmount() {
+		return soldAmount;
+	}
 
+	public void setSoldAmount(long soldAmount) {
+		this.soldAmount = soldAmount;
+	}
 }
