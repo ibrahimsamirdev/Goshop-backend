@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class User {
@@ -19,9 +21,9 @@ public class User {
 	private Boolean isSubscribed;
 //	@OneToMany(mappedBy = "user")
 //	private Set<Address> addresses;
-//	@ManyToOne
-//	@JoinColumn(name = "role_id")
-	private RoleType role;
+	@ManyToOne
+	@JoinColumn(name = "role_id")
+	private Role role;
 
 	public long getId() {
 		return id;
@@ -71,11 +73,12 @@ public class User {
 		isSubscribed = subscribed;
 	}
 
-	public RoleType getRole() {
+	public Role getRole() {
 		return role;
 	}
 
-	public void setRole(RoleType role) {
+	public void setRole(Role role) {
 		this.role = role;
 	}
+
 }
