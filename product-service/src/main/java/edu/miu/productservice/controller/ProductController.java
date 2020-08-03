@@ -66,6 +66,7 @@ public class ProductController {
 		headers.add("Number of Blocks returned", String.valueOf(products.size()));
 
 		return new ResponseEntity<List<Product>>(products, headers, HttpStatus.OK);
+		
 	}
 
 	@GetMapping(value = "/{productId}")
@@ -112,6 +113,45 @@ public class ProductController {
 	public Product updateStock(@PathVariable long soldAmount, @PathVariable long productId){
 
 		return productService.updateStock(soldAmount,productId);
+	}
+
+	//Emad -- publish & unPublish
+	@PutMapping(value="publish/{productId}")
+	public ResponseEntity<Product> publishProduct(@PathVariable long productId){
+
+		HttpHeaders headers = new HttpHeaders();
+		Product product_toEdit = productService.getProduct(productId);
+
+		if(product_toEdit == null) {
+
+			return new ResponseEntity<Product>(HttpStatus.NOT_FOUND);
+		}
+
+		product_toEdit.setPublished(true);
+		productService.addProduct(product_toEdit);
+
+		headers.add("Updated Block : ",String.valueOf(productId));
+
+		return new ResponseEntity<Product>(product_toEdit,headers, HttpStatus.OK);
+	}
+
+	@PutMapping(value="unPublish/{productId}")
+	public ResponseEntity<Product> unPublishProduct(@PathVariable long productId){
+
+		HttpHeaders headers = new HttpHeaders();
+		Product product_toEdit = productService.getProduct(productId);
+
+		if(product_toEdit == null) {
+
+			return new ResponseEntity<Product>(HttpStatus.NOT_FOUND);
+		}
+
+		product_toEdit.setPublished(false);
+		productService.addProduct(product_toEdit);
+
+		headers.add("Updated Block : ",String.valueOf(productId));
+
+		return new ResponseEntity<Product>(product_toEdit,headers, HttpStatus.OK);
 	}
 
 

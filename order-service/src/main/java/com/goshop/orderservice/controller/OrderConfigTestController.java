@@ -8,7 +8,7 @@ import com.goshop.orderservice.configuration.*;
 import com.goshop.orderservice.feignproxy.ProductProxy;
 
 @RestController
-public class RestOrderTest {
+public class OrderConfigTestController {
 
     @Autowired
     Configuration config;
@@ -20,8 +20,8 @@ public class RestOrderTest {
         return " Order Service hello";
     }
 
-    @GetMapping("/order/order-service")
-    public String testFiegnOrder(){
+    @GetMapping("/order/product-service")
+    public String testFiegnOrderToproduct(){
         return proxy.testRest()+ " from order";
     }
 
