@@ -1,6 +1,8 @@
 package com.goshop.orderservice.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.Entity;
 import javax.persistence.*;
 
@@ -13,6 +15,7 @@ public class OrderDetails {
     private long id;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "orders_id")
+    @JsonIgnoreProperties(value ={"orderDetails"})
     private Orders orders;
     private long productId;
     private double price;
@@ -63,6 +66,11 @@ public class OrderDetails {
         this.quantity = quantity;
     }
 
+    public Orders getOrders() {
+        return orders;
+    }
 
-
+    public void setOrders(Orders orders) {
+        this.orders = orders;
+    }
 }

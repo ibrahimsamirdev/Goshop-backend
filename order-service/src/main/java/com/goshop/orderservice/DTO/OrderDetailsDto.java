@@ -1,25 +1,34 @@
 package com.goshop.orderservice.DTO;
 
-public class ProductDto {
+public class OrderDetailsDto {
+    private long id;
     private long productId;
     private double price;
     private int quantity;
 
-    public ProductDto(){
+    public OrderDetailsDto(){
     }
 
-    public ProductDto(long productId, double price, int quantity) {
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public OrderDetailsDto(long productId, double price, int quantity) {
         this.productId = productId;
         this.price = price;
         this.quantity = quantity;
     }
 
-    public long getId() {
+    public long getProductId() {
         return productId;
     }
 
-    public void setId(long id) {
-        this.productId = id;
+    public void setProductId(long productId) {
+        this.productId = productId;
     }
 
     public double getPrice() {

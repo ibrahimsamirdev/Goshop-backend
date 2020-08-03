@@ -1,18 +1,18 @@
 package com.goshop.orderservice.controller;
 
 import com.goshop.orderservice.DTO.OrderDto;
+import com.goshop.orderservice.model.OrderDetails;
 import com.goshop.orderservice.model.Orders;
 import com.goshop.orderservice.service.OrderService;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
@@ -55,6 +55,31 @@ public class OrderController {
         return new ResponseEntity<Object>(order.get(), HttpStatus.OK);
     }
 
+    @PostMapping(value = "post/")
+    public ResponseEntity<Orders> addOrder(@RequestBody Orders orders) {
+
+//        HttpHeaders headers = new HttpHeaders();
+//        Orders orders1=new Orders();
+//        OrderDetails orderDetails=new OrderDetails();
+//        orderDetails.setPrice(11);
+//    orders1.addOrderDetail(orderDetails);
+//        orders1.setTotalAmount(orders.getTotalAmount());
+//        orders1.setOrderDetails(orders.getOrderDetails());
+//        orders1.setPaymentId(orders.getPaymentId());
+
+
+        if (orders == null) {
+            return new ResponseEntity<Orders>(HttpStatus.BAD_REQUEST);
+        }
+
+
+        Orders createOrders = orderService.addOrder(orders);
+        return new ResponseEntity<Orders>(createOrders, HttpStatus.CREATED);
+
+//        return new ResponseEntity<OrderDto>(orderDto, headers, HttpStatus.CREATED);
+
+    }
+
     @PostMapping(value = "/")
     public ResponseEntity<OrderDto> addOrder(@RequestBody OrderDto orderDto) {
 
@@ -68,6 +93,8 @@ public class OrderController {
         Orders createOrders = orderService.addOrder(orders);
         return new ResponseEntity<OrderDto>(convertToDto(createOrders), headers, HttpStatus.CREATED);
 
+//        return new ResponseEntity<OrderDto>(orderDto, headers, HttpStatus.CREATED);
+
     }
 
     private OrderDto convertToDto(Orders createOrders) {
@@ -78,7 +105,17 @@ public class OrderController {
     private Orders convertToEntity(OrderDto orderDto) {
         Orders orders = modelMapper.map(orderDto, Orders.class);
         return orders;
+//        ModelMapper modelMapper = new ModelMapper();
+//        TypeMap<OrderDto, Orders> typeMap = modelMapper.createTypeMap(OrderDto.class, Orders.class);
+//        typeMap.addMappings(mapper -> {
+//            mapper.map(orderDto::getOrderDetails, Orders::setOrderDetails);
+//        });
     }
+
+//    @GetMapping(value = "/cancleOrder/{orderId}")
+//    public ResponseEntity<OrderDto> addOrder(@PathVariable String orderId) {
+//
+//    }
 
 
 }
