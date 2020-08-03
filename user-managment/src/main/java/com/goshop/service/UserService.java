@@ -13,6 +13,10 @@ public interface UserService {
 
 	void updateUser(User user);
 
+	User createUser(User user);
+
+	void deleteUser(long id);
+
 	List<User> getByRole(RoleType role);
 
 }

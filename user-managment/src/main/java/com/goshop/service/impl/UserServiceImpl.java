@@ -37,6 +37,16 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public User createUser(User user) {
+		return userRepo.save(user);
+	}
+
+	@Override
+	public void deleteUser(long id) {
+		userRepo.deleteById(id);
+	}
+
+	@Override
 	public List<User> getByRole(RoleType role) {
 		return userRepo.findByRole(role);
 	}
