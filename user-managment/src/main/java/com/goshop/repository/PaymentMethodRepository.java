@@ -10,8 +10,6 @@ import com.goshop.model.PaymentMethod;
 @Repository
 public interface PaymentMethodRepository extends JpaRepository<PaymentMethod, Long> {
 
-//	List<PaymentMethod> findByUser(User user);
-
 	List<PaymentMethod> findByUserId(long userId);
 
 }
