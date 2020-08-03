@@ -26,36 +26,39 @@ public class OrderController {
     ModelMapper modelMapper;
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<Set<Orders>> getOrders(@PathVariable String userId) {
+    public ResponseEntity<Set<OrderDto>> getOrders(@PathVariable String userId) {
 
         HttpHeaders headers = new HttpHeaders();
         Set<Orders> orders = orderService.getOrders(Long.parseLong(userId));
 
         if (orders == null || orders.isEmpty()) {
-            return new ResponseEntity<Set<Orders>>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<Set<OrderDto>>(HttpStatus.NOT_FOUND);
         }
 
+       Set<OrderDto> orderDtos=orders.stream().map(this::convertToDto).collect(Collectors.toSet());
         headers.add("Number of Orders returned", String.valueOf(orders.size()));
-        return new ResponseEntity<Set<Orders>>(orders, HttpStatus.OK);
+        return new ResponseEntity<Set<OrderDto>>(orderDtos, HttpStatus.OK);
     }
 
 
     @GetMapping(value = "/{orderId}")
-    public ResponseEntity<Object> getOrder(@PathVariable String orderId) {
+    public ResponseEntity<OrderDto> getOrder(@PathVariable String orderId) {
 
         System.out.println("========> "+ orderId);
 
         Optional<Orders> order = orderService.getOrder(Long.parseLong(orderId));
 
         if (!order.isPresent()) {
-            return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<OrderDto>(HttpStatus.NOT_FOUND);
         }
 
+        OrderDto orderDto=convertToDto(order.get());
+
         System.out.println("Order " + order.get());
-        return new ResponseEntity<Object>(order.get(), HttpStatus.OK);
+        return new ResponseEntity<OrderDto>(orderDto, HttpStatus.OK);
     }
 
-    @PostMapping(value = "post/")
+/*    @PostMapping(value = "post/")
     public ResponseEntity<Orders> addOrder(@RequestBody Orders orders) {
 
 //        HttpHeaders headers = new HttpHeaders();
@@ -78,7 +81,7 @@ public class OrderController {
 
 //        return new ResponseEntity<OrderDto>(orderDto, headers, HttpStatus.CREATED);
 
-    }
+    }*/
 
     @PostMapping(value = "/")
     public ResponseEntity<OrderDto> addOrder(@RequestBody OrderDto orderDto) {
@@ -105,11 +108,6 @@ public class OrderController {
     private Orders convertToEntity(OrderDto orderDto) {
         Orders orders = modelMapper.map(orderDto, Orders.class);
         return orders;
-//        ModelMapper modelMapper = new ModelMapper();
-//        TypeMap<OrderDto, Orders> typeMap = modelMapper.createTypeMap(OrderDto.class, Orders.class);
-//        typeMap.addMappings(mapper -> {
-//            mapper.map(orderDto::getOrderDetails, Orders::setOrderDetails);
-//        });
     }
 
 //    @GetMapping(value = "/cancleOrder/{orderId}")
