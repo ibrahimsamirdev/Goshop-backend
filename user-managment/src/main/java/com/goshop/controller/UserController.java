@@ -70,11 +70,11 @@ public class UserController {
 		return new ResponseEntity<Object>("success", HttpStatus.OK);
 	}
 
-	@PostMapping()
-	public ResponseEntity<Object> createUser(@RequestBody User user) {
-		userService.createUser(user);
-		return new ResponseEntity<Object>("success", HttpStatus.OK);
-	}
+//	@PostMapping()
+//	public ResponseEntity<Object> createUser(@RequestBody User user) {
+//		userService.createUser(user);
+//		return new ResponseEntity<Object>("success", HttpStatus.OK);
+//	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Object> deleteUser(@PathVariable long id) {
