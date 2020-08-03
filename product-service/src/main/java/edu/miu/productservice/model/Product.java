@@ -28,7 +28,7 @@ public class Product {
 	@NotNull
 	private Date creationDate;
 	private String attributes;
-	//vendor Id
+	//private long vendorId;
 	private String imageUrl;
 	private long stockAmount;
 	private boolean isPublished;
