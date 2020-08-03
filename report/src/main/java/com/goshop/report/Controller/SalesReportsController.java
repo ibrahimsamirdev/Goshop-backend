@@ -65,7 +65,7 @@ public class SalesReportsController {
 
         Map<String, String> parameters = new HashMap();
 
-        parameters.put("createdBy", "test");
+        parameters.put("createdBy", "Super Admin");
 
         String pathname = "E:\\MUM\\9-PM\\0-git-repo\\Goshop-backend\\report\\src\\main\\resources\\templates\\viewAdminSalesReports.jrxml";
         try {
