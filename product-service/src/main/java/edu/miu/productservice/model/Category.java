@@ -32,12 +32,12 @@ public class Category {
 		
 	}
 
-	public Category(String name, String description) {
-		super();
+	public Category(String name, String description, boolean isDeleted, List<Category> subCategories) {
 		this.name = name;
 		this.description = description;
+		this.isDeleted = isDeleted;
+		this.subCategories = subCategories;
 	}
-
 
 	public long getId() {
 		return id;

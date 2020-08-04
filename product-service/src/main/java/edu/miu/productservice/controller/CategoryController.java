@@ -40,6 +40,16 @@ public class CategoryController {
         ResponseEntity<List<Category>> result;
 
         HttpHeaders headers = new HttpHeaders();
+//        Category c = new Category("Electronics","laptops,phones,PS4",false, Arrays.asList(
+//                new Category("Laptop","dell,hp,acer",false,Arrays.asList(
+//                        new Category("Dell","laptop",false,null),
+//                        new Category("Acer","laptop",false,null)
+//                )),
+//                new Category("Television","samsung,sony",false,Arrays.asList(
+//                        new Category("Samsung","tv",false,null),
+//                        new Category("Sony","tv",false,null)
+//                ))
+//        ));
 
         List<Category> categories = categoryService.getCategories();
 

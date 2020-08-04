@@ -52,7 +52,7 @@ public class ProductController {
 
         HttpHeaders headers = new HttpHeaders();
 
-        Product p = new Product(new Category("Fridge", "Haier"), "Refridgerator", "small size", 100.00, new Date(), "15 inch", "image/fridge", 50, true, false, null);
+        Product p = new Product(new Category("Fridge", "Haier",false,null), "Refridgerator", "small size", 100.00, new Date(), "15 inch", "image/fridge", 50, true, false, null);
         p.setPromotions(
                 Arrays.asList(
                         new Promotion("Christmas Promotion", new Date(2020, 12, 01), new Date(2020, 12, 30), 0.25),
