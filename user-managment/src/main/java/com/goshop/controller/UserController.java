@@ -2,6 +2,8 @@ package com.goshop.controller;
 
 import java.util.List;
 
+import com.goshop.dto.UpdateUserDTO;
+import com.goshop.model.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -72,17 +74,44 @@ public class UserController {
 	 * @return string "success"
 	 */
 	@PutMapping()
-	public ResponseEntity<Object> updateUser(@RequestBody User user) {
+	public ResponseEntity<Object> updateUser(@RequestBody UpdateUserDTO user) {
 		userService.updateUser(user);
 		return new ResponseEntity<Object>("success", HttpStatus.OK);
 	}
 
+	/**
+	 * Create User with any role
+	 *
+	 * @param user - the user to be created
+	 * @return string "success"
+	 */
 	@PostMapping()
 	public ResponseEntity<Object> createUser(@RequestBody User user) {
 		userService.createUser(user);
 		return new ResponseEntity<Object>("success", HttpStatus.CREATED);
 	}
 
+	/**
+	 * register User with registeredUser role
+	 *
+	 * @param user - the user to be created
+	 * @return string "success"
+	 */
+	@PostMapping("/register")
+	public ResponseEntity<Object> signout(@RequestBody User user) {
+		Role r = new Role();
+		r.setRole(RoleType.registeredUser);
+		user.setRole(r);
+		User u = userService.createUser(user);
+		return new ResponseEntity<Object>("success", HttpStatus.CREATED);
+	}
+
+	/**
+	 * Delete User by id
+	 *
+	 * @param id - the id for the user
+	 * @return string "user deleted successfully"
+	 */
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Object> deleteUser(@PathVariable long id) {
 		userService.deleteUser(id);

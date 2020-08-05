@@ -41,12 +41,12 @@ public class UserController {
         return new ResponseEntity<Object>("success", HttpStatus.CREATED);
     }
 
-    @CrossOrigin("*")
-    @PostMapping("/createUser")
-    public ResponseEntity<Object> createUser(@RequestBody User user) {
-        User u = userService.saveUser(user,user.getRole().getRole());
-        return new ResponseEntity<Object>("success", HttpStatus.CREATED);
-    }
+//    @CrossOrigin("*")
+//    @PostMapping("/createUser")
+//    public ResponseEntity<Object> createUser(@RequestBody User user) {
+//        User u = userService.saveUser(user,user.getRole().getRole());
+//        return new ResponseEntity<Object>("success", HttpStatus.CREATED);
+//    }
 
 
 }

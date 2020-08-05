@@ -2,6 +2,7 @@ package com.goshop.service;
 
 import java.util.List;
 
+import com.goshop.dto.UpdateUserDTO;
 import com.goshop.model.RoleType;
 import com.goshop.model.User;
 
@@ -11,7 +12,7 @@ public interface UserService {
 
 	User getById(long id);
 
-	void updateUser(User user);
+	void updateUser(UpdateUserDTO user);
 
 	User createUser(User user);
 

@@ -1,23 +1,20 @@
-package com.goshop.model;
+package com.goshop.dto;
 
-import javax.persistence.*;
-import java.util.Set;
+import com.goshop.model.Role;
 
-@Entity
-public class User {
+import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
-    @Id
-    @GeneratedValue
+public class UpdateUserDTO {
+
     private long id;
     private String name;
-    @Column(unique = true, length = 250)
     private String email;
     private String pass;
+    private String newPass;
     private String mobile;
     private Boolean isSubscribed;
-
-    @ManyToOne
-    @JoinColumn(name= "role_id")
     private Role role;
 
     public long getId() {
@@ -50,6 +47,14 @@ public class User {
 
     public void setPass(String pass) {
         this.pass = pass;
+    }
+
+    public String getNewPass() {
+        return newPass;
+    }
+
+    public void setNewPass(String newPass) {
+        this.newPass = newPass;
     }
 
     public String getMobile() {
