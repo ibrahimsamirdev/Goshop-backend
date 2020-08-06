@@ -90,4 +90,9 @@ public class UserServiceImpl implements UserService {
 		userRepo.save(user);
 	}
 
+	@Override
+	public List<User> getVendorEmployees(long vendorId) {
+		return userRepo.findByVendor_Id(vendorId);
+	}
+
 }

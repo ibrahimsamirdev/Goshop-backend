@@ -25,6 +25,10 @@ public class User {
 	@JoinColumn(name = "role_id")
 	private Role role;
 
+	@ManyToOne
+	@JoinColumn(name ="vendor_id")
+	private User vendor;
+
 	public long getId() {
 		return id;
 	}
@@ -81,4 +85,11 @@ public class User {
 		this.role = role;
 	}
 
+	public User getVendor() {
+		return vendor;
+	}
+
+	public void setVendor(User vendor) {
+		this.vendor = vendor;
+	}
 }

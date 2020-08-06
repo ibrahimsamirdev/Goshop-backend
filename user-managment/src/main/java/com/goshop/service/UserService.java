@@ -22,4 +22,6 @@ public interface UserService {
 
 	void paySubscription(long id);
 
+	List<User> getVendorEmployees(long vendorId);
+
 }

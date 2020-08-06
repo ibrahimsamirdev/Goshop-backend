@@ -7,20 +7,14 @@ import com.goshop.model.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.goshop.model.RoleType;
 import com.goshop.model.User;
 import com.goshop.service.UserService;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/api/user")
 public class UserController {
 
@@ -128,6 +122,18 @@ public class UserController {
 	public ResponseEntity<Object> paySubscription(@PathVariable long id) {
 		userService.paySubscription(id);
 		return new ResponseEntity<Object>("success", HttpStatus.OK);
+	}
+
+	/**
+	 * get vendor empoloyees
+	 *
+	 * @param vendorId
+	 * @return List<User> employees
+	 * */
+	@GetMapping("/employees/{vendorId}")
+	public ResponseEntity<Object> getVendorEmployees(@PathVariable long vendorId){
+		List<User> users = userService.getVendorEmployees(vendorId);
+		return new ResponseEntity<>(users,HttpStatus.OK);
 	}
 
 }

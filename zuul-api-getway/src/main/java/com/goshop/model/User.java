@@ -1,7 +1,11 @@
 package com.goshop.model;
 
-import javax.persistence.*;
-import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class User {
@@ -15,10 +19,15 @@ public class User {
     private String pass;
     private String mobile;
     private Boolean isSubscribed;
+    //	@OneToMany(mappedBy = "user")
+//	private Set<Address> addresses;
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
 
     @ManyToOne
-    @JoinColumn(name= "role_id")
-    private Role role;
+    @JoinColumn(name ="vendor_id")
+    private User vendor;
 
     public long getId() {
         return id;
@@ -74,5 +83,13 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public User getVendor() {
+        return vendor;
+    }
+
+    public void setVendor(User vendor) {
+        this.vendor = vendor;
     }
 }
