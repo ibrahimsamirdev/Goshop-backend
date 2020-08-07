@@ -36,6 +36,17 @@ public class TransactionController {
 	}
 
 	/**
+	 * Get all Transactions By Card Number
+	 * 
+	 * @return List of Transaction objects for certain card
+	 */
+	@GetMapping("cardnumber/{cardNo}")
+	public ResponseEntity<Object> getAllTransactionsByCardNo(@PathVariable long cardNo) {
+		List<Transaction> cards = transactionService.getAllByCreditCardNo(cardNo);
+		return new ResponseEntity<Object>(cards, HttpStatus.OK);
+	}
+
+	/**
 	 * Get Transaction by Id
 	 * 
 	 * @param id - Transaction id

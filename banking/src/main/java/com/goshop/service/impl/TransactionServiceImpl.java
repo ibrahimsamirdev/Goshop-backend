@@ -50,7 +50,8 @@ public class TransactionServiceImpl implements TransactionService {
 
 	@Override
 	public List<Transaction> getAllByCreditCardNo(long cardNo) {
-		return null;
+		CreditCard creditCard = creditCardService.getByCardNo(cardNo);
+		return transactionRepo.findAllByCreditCardId(creditCard.getId());
 	}
 
 }
