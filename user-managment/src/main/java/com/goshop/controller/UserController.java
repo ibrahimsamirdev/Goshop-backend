@@ -136,4 +136,14 @@ public class UserController {
 		return new ResponseEntity<>(users,HttpStatus.OK);
 	}
 
+	/**
+	 * get All vendor
+	 *
+	 * @return List<User> vendors
+	 * */
+	@GetMapping("/vendors")
+	public ResponseEntity<Object> getAllVendors(){
+		List<User> vendors = userService.getAllVendors();
+		return new ResponseEntity<>(vendors, HttpStatus.OK);
+	}
 }

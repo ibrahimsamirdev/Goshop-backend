@@ -24,4 +24,6 @@ public interface UserService {
 
 	List<User> getVendorEmployees(long vendorId);
 
+	List<User> getAllVendors();
+
 }

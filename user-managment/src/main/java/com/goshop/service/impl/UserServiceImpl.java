@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.goshop.dto.UpdateUserDTO;
+import com.goshop.model.Role;
 import com.goshop.service.RoleService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,6 +98,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> getVendorEmployees(long vendorId) {
 		return userRepo.findByVendor_Id(vendorId);
+	}
+
+	@Override
+	public List<User> getAllVendors() {
+		return userRepo.findByRole_Role(RoleType.vendor);
 	}
 
 }
