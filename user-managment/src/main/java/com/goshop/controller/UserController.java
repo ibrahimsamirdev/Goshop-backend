@@ -68,7 +68,7 @@ public class UserController {
 	 * @return string "success"
 	 */
 	@PutMapping()
-	public ResponseEntity<Object> updateUser(@RequestBody UpdateUserDTO user) {
+	public ResponseEntity<Object> updateUser(@RequestBody User user) {
 		userService.updateUser(user);
 		return new ResponseEntity<Object>("success", HttpStatus.OK);
 	}
