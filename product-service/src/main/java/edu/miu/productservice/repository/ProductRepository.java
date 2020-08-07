@@ -16,4 +16,12 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query("SELECT d from Product d order by d.vendorId,d.id")
     List<Product> findRProductsAdmin();
+
+    //ANDREW: Advanced Search
+
+    //Simple derived query with parameters
+    List<Product> findByTitle(String title);
+
+    //Derived queries with multiple parameters
+    List<Product> findByTitleAndDescription(String title, String description);
 }
