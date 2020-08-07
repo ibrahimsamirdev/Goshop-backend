@@ -68,7 +68,7 @@ public class UserController {
 	 * @return string "success"
 	 */
 	@PutMapping()
-	public ResponseEntity<Object> updateUser(@RequestBody UpdateUserDTO user) {
+	public ResponseEntity<Object> updateUser(@RequestBody User user) {
 		userService.updateUser(user);
 		return new ResponseEntity<Object>("success", HttpStatus.OK);
 	}
@@ -136,4 +136,14 @@ public class UserController {
 		return new ResponseEntity<>(users,HttpStatus.OK);
 	}
 
+	/**
+	 * get All vendor
+	 *
+	 * @return List<User> vendors
+	 * */
+	@GetMapping("/vendors")
+	public ResponseEntity<Object> getAllVendors(){
+		List<User> vendors = userService.getAllVendors();
+		return new ResponseEntity<>(vendors, HttpStatus.OK);
+	}
 }

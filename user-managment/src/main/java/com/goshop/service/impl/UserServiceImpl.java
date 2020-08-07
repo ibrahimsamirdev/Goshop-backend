@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.goshop.dto.UpdateUserDTO;
+import com.goshop.model.Role;
 import com.goshop.service.RoleService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,25 +43,29 @@ public class UserServiceImpl implements UserService {
 		return userRepo.findById(id).orElseThrow(() -> new CustomException("User Not Found", HttpStatus.NOT_FOUND));
 	}
 
-	@Override
-	public void updateUser(UpdateUserDTO userDTO) {
-//		if (!userRepo.existsById(userDTO.getId())) {
-//			throw new CustomException("User Doesn't Exist", HttpStatus.NOT_FOUND);
-//		}
 
-		Optional<User> userOptional = userRepo.findById(userDTO.getId());
-		if(!userOptional.isPresent()){
+	@Override
+	public void updateUser(User user) {
+		if (!userRepo.existsById(user.getId())) {
 			throw new CustomException("User Doesn't Exist", HttpStatus.NOT_FOUND);
 		}
-		boolean isPasswordMatch = passwordEncoder.matches(userDTO.getPass(), userOptional.get().getPass());
-		if(!isPasswordMatch){
-			throw new CustomException("Old password is wrong", HttpStatus.NOT_ACCEPTABLE);
-		}
-
-		User user = modelMapper.map(userDTO, User.class);
-		user.setPass(passwordEncoder.encode(userDTO.getNewPass()));
 		userRepo.save(user);
 	}
+//	@Override
+//	public void updateUser(UpdateUserDTO userDTO) {
+//		Optional<User> userOptional = userRepo.findById(userDTO.getId());
+//		if(!userOptional.isPresent()){
+//			throw new CustomException("User Doesn't Exist", HttpStatus.NOT_FOUND);
+//		}
+//		boolean isPasswordMatch = passwordEncoder.matches(userDTO.getPass(), userOptional.get().getPass());
+//		if(!isPasswordMatch){
+//			throw new CustomException("Old password is wrong", HttpStatus.NOT_ACCEPTABLE);
+//		}
+//
+//		User user = modelMapper.map(userDTO, User.class);
+//		user.setPass(passwordEncoder.encode(userDTO.getNewPass()));
+//		userRepo.save(user);
+//	}
 
 	@Override
 	public User createUser(User user) {
@@ -93,6 +98,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> getVendorEmployees(long vendorId) {
 		return userRepo.findByVendor_Id(vendorId);
+	}
+
+	@Override
+	public List<User> getAllVendors() {
+		return userRepo.findByRole_Role(RoleType.vendor);
 	}
 
 }

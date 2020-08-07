@@ -12,7 +12,7 @@ public interface UserService {
 
 	User getById(long id);
 
-	void updateUser(UpdateUserDTO user);
+	void updateUser(User user);
 
 	User createUser(User user);
 
@@ -23,5 +23,7 @@ public interface UserService {
 	void paySubscription(long id);
 
 	List<User> getVendorEmployees(long vendorId);
+
+	List<User> getAllVendors();
 
 }

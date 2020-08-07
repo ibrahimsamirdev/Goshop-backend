@@ -7,6 +7,8 @@ import com.goshop.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 
 public class RoleServiceImpl implements RoleService {
@@ -22,5 +24,10 @@ public class RoleServiceImpl implements RoleService {
             role = roleRepository.save(role);
         }
         return role;
+    }
+
+    @Override
+    public List<Role> getAllRoles() {
+        return roleRepository.findAll();
     }
 }
