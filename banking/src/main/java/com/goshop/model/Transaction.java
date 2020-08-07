@@ -15,12 +15,22 @@ public class Transaction {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	private Double amountOfPurchase;
-	private LocalDate dateOfPurchase;
-	private Double remainingAmount;
+	private Double amount;
+	private LocalDate transactionDate;
 	@ManyToOne
 	@JoinColumn(name = "creditCardId")
 	private CreditCard creditCard;
+
+	public Transaction() {
+		super();
+	}
+
+	public Transaction(Double amount, LocalDate transactionDate, CreditCard creditCard) {
+		super();
+		this.amount = amount;
+		this.transactionDate = transactionDate;
+		this.creditCard = creditCard;
+	}
 
 	public long getId() {
 		return id;
@@ -30,28 +40,20 @@ public class Transaction {
 		this.id = id;
 	}
 
-	public Double getAmountOfPurchase() {
-		return amountOfPurchase;
+	public Double getAmount() {
+		return amount;
 	}
 
-	public void setAmountOfPurchase(Double amountOfPurchase) {
-		this.amountOfPurchase = amountOfPurchase;
+	public void setAmount(Double amount) {
+		this.amount = amount;
 	}
 
-	public LocalDate getDateOfPurchase() {
-		return dateOfPurchase;
+	public LocalDate getTransactionDate() {
+		return transactionDate;
 	}
 
-	public void setDateOfPurchase(LocalDate dateOfPurchase) {
-		this.dateOfPurchase = dateOfPurchase;
-	}
-
-	public Double getRemainingAmount() {
-		return remainingAmount;
-	}
-
-	public void setRemainingAmount(Double remainingAmount) {
-		this.remainingAmount = remainingAmount;
+	public void setTransactionDate(LocalDate transactionDate) {
+		this.transactionDate = transactionDate;
 	}
 
 	public CreditCard getCreditCard() {

@@ -10,6 +10,8 @@ public interface CreditCardService {
 
 	CreditCard getById(long id);
 
+	CreditCard getByCardNo(long cardNo);
+
 	void createCreditCard(CreditCard card);
 
 	void deleteCreditCard(long id);

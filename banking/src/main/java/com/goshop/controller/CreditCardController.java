@@ -53,6 +53,18 @@ public class CreditCardController {
 	}
 
 	/**
+	 * Get Credit Card by Credit Card Number
+	 * 
+	 * @param cardNo - Credit Card Number
+	 * @return Credit Card object
+	 */
+	@GetMapping("/number/{cardNo}")
+	public ResponseEntity<Object> getCreditCardByCardNo(@PathVariable long cardNo) {
+		CreditCard card = creditCardService.getByCardNo(cardNo);
+		return new ResponseEntity<Object>(card, HttpStatus.OK);
+	}
+
+	/**
 	 * Create Credit Card
 	 *
 	 * @param card - the Credit Card to be created
