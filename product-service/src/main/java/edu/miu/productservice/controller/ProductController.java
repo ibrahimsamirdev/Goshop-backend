@@ -52,7 +52,7 @@ public class ProductController {
 
         HttpHeaders headers = new HttpHeaders();
 
-        Product p = new Product(new Category("Fridge", "Haier"), "Refridgerator", "small size", 100.00, new Date(), "15 inch", "image/fridge", 50, true, false, null);
+        Product p = new Product(new Category("Fridge", "Haier",false,null), "Refridgerator", "small size", 100.00, new Date(), "15 inch", "image/fridge", 50, true, false, null);
         p.setPromotions(
                 Arrays.asList(
                         new Promotion("Christmas Promotion", new Date(2020, 12, 01), new Date(2020, 12, 30), 0.25),
@@ -160,6 +160,17 @@ public class ProductController {
         headers.add("Updated Block : ", String.valueOf(productId));
 
         return new ResponseEntity<Product>(product_toEdit, headers, HttpStatus.OK);
+    }
+
+    //Andrew: - find Product by title
+    @GetMapping("/findByTitle/{title}")
+    public List<Product> findByTitle(@PathVariable String title){
+        return productService.findByTitle(title);
+    }
+
+    @GetMapping("/findByTitleAndDescription/{title}/{description}")
+    public  List<Product> findByTitleAndDescription(@PathVariable String title,@PathVariable String description){
+        return productService.findByTitleAndDescription(title,description);
     }
 
 
