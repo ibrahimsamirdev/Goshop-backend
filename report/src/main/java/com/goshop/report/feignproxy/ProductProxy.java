@@ -15,6 +15,6 @@ public interface ProductProxy {
     @GetMapping("/report/salesForVendor/{vendorId}")
       List<ReportProductDto> salesReportsVendor(@PathVariable long vendorId);
 
-    @GetMapping("/report/salesForAdmin")
+      @GetMapping("/report/salesForAdmin")
     public List<AdminReportProductDto> salesReportsAdmin();
 }
