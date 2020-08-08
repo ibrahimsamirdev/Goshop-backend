@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -34,12 +35,22 @@ public class CategoryController {
         return new ResponseEntity<Category>(category, headers, HttpStatus.CREATED);
 
     }
-
+    //ResponseEntity<List<Category>>
     @GetMapping(value = "/")
     public ResponseEntity<List<Category>> getCategories() {
         ResponseEntity<List<Category>> result;
 
         HttpHeaders headers = new HttpHeaders();
+//        Category c = new Category("Electronics","laptops,phones,PS4",false, Arrays.asList(
+//                new Category("Laptop","dell,hp,acer",false,Arrays.asList(
+//                        new Category("Dell","laptop",false,null),
+//                        new Category("Acer","laptop",false,null)
+//                )),
+//                new Category("Television","samsung,sony",false,Arrays.asList(
+//                        new Category("Samsung","tv",false,null),
+//                        new Category("Sony","tv",false,null)
+//                ))
+//        ));
 
         List<Category> categories = categoryService.getCategories();
 

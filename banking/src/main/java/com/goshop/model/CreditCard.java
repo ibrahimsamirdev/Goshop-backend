@@ -19,10 +19,11 @@ public class CreditCard {
 	private LocalDate expireDate;
 	private int csv;
 	private String nameOnCard;
-	private Double initialValue;
-	private Double upgradeAmount;
-	private LocalDate upgradeDate;
-	private Double currentValue;
+//	private Double initialValue;
+//	private Double upgradeAmount;
+//	private LocalDate upgradeDate;
+	private Double creditLine;
+	private Double availableCredit;
 
 	public long getId() {
 		return id;
@@ -64,36 +65,20 @@ public class CreditCard {
 		this.nameOnCard = nameOnCard;
 	}
 
-	public Double getInitialValue() {
-		return initialValue;
+	public Double getCreditLine() {
+		return creditLine;
 	}
 
-	public void setInitialValue(Double initialValue) {
-		this.initialValue = initialValue;
+	public void setCreditLine(Double creditLine) {
+		this.creditLine = creditLine;
 	}
 
-	public Double getUpgradeAmount() {
-		return upgradeAmount;
+	public Double getAvailableCredit() {
+		return availableCredit;
 	}
 
-	public void setUpgradeAmount(Double upgradeAmount) {
-		this.upgradeAmount = upgradeAmount;
-	}
-
-	public LocalDate getUpgradeDate() {
-		return upgradeDate;
-	}
-
-	public void setUpgradeDate(LocalDate upgradeDate) {
-		this.upgradeDate = upgradeDate;
-	}
-
-	public Double getCurrentValue() {
-		return currentValue;
-	}
-
-	public void setCurrentValue(Double currentValue) {
-		this.currentValue = currentValue;
+	public void setAvailableCredit(Double availableCredit) {
+		this.availableCredit = availableCredit;
 	}
 
 }
