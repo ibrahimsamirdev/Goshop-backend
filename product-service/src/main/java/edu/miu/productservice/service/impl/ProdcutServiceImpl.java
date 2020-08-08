@@ -88,5 +88,23 @@ public class ProdcutServiceImpl implements ProductService {
 		return productRepository.save(product);
 	}
 
+	//find product by title
+	public List<Product> findByTitle(String title){
+		return productRepository.findByTitle(title);
+	}
+
+	//find by title and description
+	public  List<Product> findByTitleAndDescription(String title,String description){
+		return productRepository.findByTitleAndDescription(title,description);
+	}
+
+	@Override
+
+
+	//find by category name
+	public List<Product> findByCategoryName(String name){
+		return productRepository.findByCategoryName(name);
+	}
+
 
 }

@@ -2,23 +2,19 @@ package com.goshop.controller;
 
 import java.util.List;
 
+import com.goshop.dto.UpdateUserDTO;
+import com.goshop.model.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.goshop.model.RoleType;
 import com.goshop.model.User;
 import com.goshop.service.UserService;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/api/user")
 public class UserController {
 
@@ -73,16 +69,43 @@ public class UserController {
 	 */
 	@PutMapping()
 	public ResponseEntity<Object> updateUser(@RequestBody User user) {
-		userService.updateUser(user);
-		return new ResponseEntity<Object>("success", HttpStatus.OK);
+		User u = userService.updateUser(user);
+		return new ResponseEntity<Object>(u, HttpStatus.OK);
 	}
 
+	/**
+	 * Create User with any role
+	 *
+	 * @param user - the user to be created
+	 * @return string "success"
+	 */
 	@PostMapping()
 	public ResponseEntity<Object> createUser(@RequestBody User user) {
-		userService.createUser(user);
+		User u = userService.createUser(user);
+		return new ResponseEntity<Object>(u, HttpStatus.CREATED);
+	}
+
+	/**
+	 * register User with registeredUser role
+	 *
+	 * @param user - the user to be created
+	 * @return string "success"
+	 */
+	@PostMapping("/register")
+	public ResponseEntity<Object> signout(@RequestBody User user) {
+		Role r = new Role();
+		r.setRole(RoleType.registeredUser);
+		user.setRole(r);
+		User u = userService.createUser(user);
 		return new ResponseEntity<Object>("success", HttpStatus.CREATED);
 	}
 
+	/**
+	 * Delete User by id
+	 *
+	 * @param id - the id for the user
+	 * @return string "user deleted successfully"
+	 */
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Object> deleteUser(@PathVariable long id) {
 		userService.deleteUser(id);
@@ -101,4 +124,26 @@ public class UserController {
 		return new ResponseEntity<Object>("success", HttpStatus.OK);
 	}
 
+	/**
+	 * get vendor empoloyees
+	 *
+	 * @param vendorId
+	 * @return List<User> employees
+	 * */
+	@GetMapping("/employees/{vendorId}")
+	public ResponseEntity<Object> getVendorEmployees(@PathVariable long vendorId){
+		List<User> users = userService.getVendorEmployees(vendorId);
+		return new ResponseEntity<>(users,HttpStatus.OK);
+	}
+
+	/**
+	 * get All vendor
+	 *
+	 * @return List<User> vendors
+	 * */
+	@GetMapping("/vendors")
+	public ResponseEntity<Object> getAllVendors(){
+		List<User> vendors = userService.getAllVendors();
+		return new ResponseEntity<>(vendors, HttpStatus.OK);
+	}
 }

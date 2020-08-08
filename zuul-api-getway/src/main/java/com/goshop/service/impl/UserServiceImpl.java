@@ -1,6 +1,7 @@
 package com.goshop.service.impl;
 
 import com.goshop.Security.JwtTokenProvider;
+import com.goshop.dto.LoggedUser;
 import com.goshop.exception.CustomException;
 import com.goshop.model.Role;
 import com.goshop.model.RoleType;
@@ -58,7 +59,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
         return org.springframework.security.core.userdetails.User//
                 .withUsername(email)//
-                .password(user.getPassword())//
+                .password(user.getPass())//
                 .authorities(authority)//
                 .accountExpired(false)//
                 .accountLocked(false)//
@@ -72,7 +73,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
 
     @Override
-    public String login(String username, String password) {
+    public LoggedUser login(String username, String password) {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username,
                     password));
@@ -87,7 +88,10 @@ public class UserServiceImpl implements UserDetailsService, UserService {
             List<String> roles = new ArrayList<>();
             roles.add(user.getRole().toString());
             String token =  jwtTokenProvider.createToken(username, roles);
-            return token;
+            LoggedUser loggedUser = new LoggedUser();
+            loggedUser.setToken(token);
+            loggedUser.setUser(user);
+            return loggedUser;
 
         } catch (AuthenticationException e) {
             throw new CustomException("Invalid username or password.", HttpStatus.UNAUTHORIZED);
@@ -97,7 +101,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     @Override
     public User saveUser(User user, RoleType roleType) {
         user.setRole(roleService.getRoleByType(roleType));
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPass(passwordEncoder.encode(user.getPass()));
         return userRepository.save(user);
     }
 
