@@ -162,7 +162,7 @@ public class ProductController {
         return new ResponseEntity<Product>(product_toEdit, headers, HttpStatus.OK);
     }
 
-    //Andrew: - find Product by title
+    //Andrew: - ADVANCED SEARCH find Product by title
     @GetMapping("/findByTitle/{title}")
     public List<Product> findByTitle(@PathVariable String title){
         return productService.findByTitle(title);
@@ -172,6 +172,14 @@ public class ProductController {
     public  List<Product> findByTitleAndDescription(@PathVariable String title,@PathVariable String description){
         return productService.findByTitleAndDescription(title,description);
     }
+
+
+    @GetMapping("/findByCategorysName/{name}")
+    public List<Product> findByCategorysName(@PathVariable String name){
+        return productService.findByCategoryName(name);
+    }
+
+
 
 
 }

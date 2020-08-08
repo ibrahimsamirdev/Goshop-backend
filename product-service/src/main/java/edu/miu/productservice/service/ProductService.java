@@ -18,6 +18,8 @@ public interface ProductService {
 	//Andrew Advanced Search
 	public List<Product> findByTitle(String title);
 	public  List<Product> findByTitleAndDescription(String title,String description);
+	public List<Product> findByCategoryName(String name);
+
 
 
 }
