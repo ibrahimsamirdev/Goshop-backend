@@ -24,4 +24,9 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     //Derived queries with multiple parameters
     List<Product> findByTitleAndDescription(String title, String description);
+
+    //Traverse associations in derived queries
+     List<Product> findByCategoryName(String title);
+
+
 }

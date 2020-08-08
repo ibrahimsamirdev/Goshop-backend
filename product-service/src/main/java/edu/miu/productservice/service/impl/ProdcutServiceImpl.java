@@ -98,5 +98,13 @@ public class ProdcutServiceImpl implements ProductService {
 		return productRepository.findByTitleAndDescription(title,description);
 	}
 
+	@Override
+
+
+	//find by category name
+	public List<Product> findByCategoryName(String name){
+		return productRepository.findByCategoryName(name);
+	}
+
 
 }
