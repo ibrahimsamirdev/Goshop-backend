@@ -21,4 +21,9 @@ public class RoleController {
     public ResponseEntity<Object> getAllRoles(){
         return new ResponseEntity<>(roleService.getAllRoles(), HttpStatus.OK);
     }
+
+    @GetMapping("/vendor/employees")
+    public ResponseEntity<Object> getVendorEmployeesRoles(){
+        return new ResponseEntity<>(roleService.getVendorsEmployeesRoles(), HttpStatus.OK);
+    }
 }

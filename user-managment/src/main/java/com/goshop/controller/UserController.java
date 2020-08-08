@@ -69,8 +69,8 @@ public class UserController {
 	 */
 	@PutMapping()
 	public ResponseEntity<Object> updateUser(@RequestBody User user) {
-		userService.updateUser(user);
-		return new ResponseEntity<Object>("success", HttpStatus.OK);
+		User u = userService.updateUser(user);
+		return new ResponseEntity<Object>(u, HttpStatus.OK);
 	}
 
 	/**
@@ -81,8 +81,8 @@ public class UserController {
 	 */
 	@PostMapping()
 	public ResponseEntity<Object> createUser(@RequestBody User user) {
-		userService.createUser(user);
-		return new ResponseEntity<Object>("success", HttpStatus.CREATED);
+		User u = userService.createUser(user);
+		return new ResponseEntity<Object>(u, HttpStatus.CREATED);
 	}
 
 	/**

@@ -34,4 +34,11 @@ public class UserControllerTest {
         ResponseEntity<Object> response = restTemplate.getForEntity(url, Object.class);
         Assert.assertEquals(200, response.getStatusCodeValue());
     }
+
+    @Test
+    public void getVendorEmployeesRoles(){
+        String url ="http://localhost:"+port+"/api/role/vendor/employees";
+        ResponseEntity<Object> response = restTemplate.getForEntity(url,Object.class);
+        Assert.assertEquals(200,response.getStatusCodeValue());
+    }
 }

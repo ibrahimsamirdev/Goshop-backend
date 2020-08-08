@@ -12,7 +12,7 @@ public interface UserService {
 
 	User getById(long id);
 
-	void updateUser(User user);
+	User updateUser(User user);
 
 	User createUser(User user);
 
@@ -25,5 +25,6 @@ public interface UserService {
 	List<User> getVendorEmployees(long vendorId);
 
 	List<User> getAllVendors();
+
 
 }

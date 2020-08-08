@@ -45,11 +45,11 @@ public class UserServiceImpl implements UserService {
 
 
 	@Override
-	public void updateUser(User user) {
+	public User updateUser(User user) {
 		if (!userRepo.existsById(user.getId())) {
 			throw new CustomException("User Doesn't Exist", HttpStatus.NOT_FOUND);
 		}
-		userRepo.save(user);
+		return userRepo.save(user);
 	}
 //	@Override
 //	public void updateUser(UpdateUserDTO userDTO) {
@@ -104,5 +104,6 @@ public class UserServiceImpl implements UserService {
 	public List<User> getAllVendors() {
 		return userRepo.findByRole_Role(RoleType.vendor);
 	}
+
 
 }
