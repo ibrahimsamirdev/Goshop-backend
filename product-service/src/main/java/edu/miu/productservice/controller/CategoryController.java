@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/category")
 public class CategoryController {
     @Autowired
@@ -102,5 +103,10 @@ public class CategoryController {
 
 
         return  categoryService.deleteCategory(categoryId);
+    }
+
+    @GetMapping(value = "/subCategories")
+    public ResponseEntity<Object> getSubCaregories(){
+        return new ResponseEntity<Object>(categoryService.getAllSubCategory(), HttpStatus.OK);
     }
 }
