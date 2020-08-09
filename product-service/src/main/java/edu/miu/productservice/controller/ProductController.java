@@ -1,5 +1,6 @@
 package edu.miu.productservice.controller;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -12,17 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/product")
 public class ProductController {
 
@@ -52,7 +48,7 @@ public class ProductController {
 
         HttpHeaders headers = new HttpHeaders();
 
-        Product p = new Product(new Category("Fridge", "Haier",false,null), "Refridgerator", "small size", 100.00, new Date(), "15 inch", "image/fridge", 50, true, false, null);
+        Product p = new Product(new Category("Fridge", "Haier",false,null), "Refridgerator", "small size", 100.00, LocalDate.now(), "15 inch", "image/fridge", 50, true, false, null);
         p.setPromotions(
                 Arrays.asList(
                         new Promotion("Christmas Promotion", new Date(2020, 12, 01), new Date(2020, 12, 30), 0.25),
@@ -179,6 +175,18 @@ public class ProductController {
         return productService.findByCategoryName(name);
     }
 
+    @GetMapping("/vendor/{id}")
+    public ResponseEntity<Object> getVendorProducts(@PathVariable("id") long id){
+        List<Product> products =  productService.getVendorProducts(id);
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+
+    @PostMapping("/uploadProduct")
+    public ResponseEntity<Object> uloadProduct(@RequestParam("image")MultipartFile image, @RequestPart("product") Product product){
+//        List<Product> products =  productService.getVendorProducts(id);
+        Product createdProduct = productService.createProductWithImage(image, product);
+        return new ResponseEntity<>(createdProduct, HttpStatus.OK);
+    }
 
 
 
