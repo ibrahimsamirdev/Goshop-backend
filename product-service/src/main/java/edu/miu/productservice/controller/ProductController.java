@@ -208,5 +208,28 @@ public class ProductController {
     }
 
 
+    @GetMapping("/published")
+    public ResponseEntity<Object> getPublishedProducts(){
+        List<Product> products =  productService.getPublishedProducts();
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+
+    @GetMapping("/nonPublished")
+    public ResponseEntity<Object> getNonPublishedProducts(){
+        List<Product> products =  productService.getNonPublishedProducts();
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+
+    @GetMapping("/deleted")
+    public ResponseEntity<Object> getDeletedProducts(){
+        List<Product> products =  productService.getDeletedProducts();
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+
+    @GetMapping("/nonDeleted")
+    public ResponseEntity<Object> getNonDeletedProducts(){
+        List<Product> products =  productService.getNonDeletedProducts();
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
 
 }

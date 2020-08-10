@@ -34,4 +34,14 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     List<Product> findProductByVendorIdAndIsPublishedNotAndIsDeletedFalse(long vendorId, boolean t);
 
+
+
+    List<Product> findProductByIsPublishedTrueAndIsDeletedFalse();
+
+    List<Product> findProductByIsPublishedNotAndIsDeletedFalse(boolean t);
+
+    List<Product> findByIsDeletedNot(boolean t);
+
+    List<Product> findByIsDeletedTrue();
+
 }

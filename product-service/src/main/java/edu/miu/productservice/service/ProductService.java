@@ -31,4 +31,12 @@ public interface ProductService {
 
 	List<Product> getVendorNonPublishedProducts(long vendorId);
 
+	List<Product> getNonDeletedProducts();
+
+	List<Product> getDeletedProducts();
+
+	List<Product> getPublishedProducts();
+
+	List<Product> getNonPublishedProducts();
+
 }

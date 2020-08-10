@@ -144,5 +144,25 @@ public class ProdcutServiceImpl implements ProductService {
 		return productRepository.findProductByVendorIdAndIsPublishedNotAndIsDeletedFalse(vendorId, true);
 	}
 
+	@Override
+	public List<Product> getNonDeletedProducts() {
+		return productRepository.findByIsDeletedNot(true);
+	}
+
+	@Override
+	public List<Product> getDeletedProducts() {
+		return productRepository.findByIsDeletedTrue();
+	}
+
+	@Override
+	public List<Product> getPublishedProducts() {
+		return productRepository.findProductByIsPublishedTrueAndIsDeletedFalse();
+	}
+
+	@Override
+	public List<Product> getNonPublishedProducts() {
+		return productRepository.findProductByIsPublishedNotAndIsDeletedFalse(true);
+	}
+
 
 }
