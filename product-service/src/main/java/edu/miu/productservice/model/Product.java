@@ -1,13 +1,12 @@
 package edu.miu.productservice.model;
 
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
 
 import javax.persistence.*;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -18,7 +17,7 @@ public class Product {
 	private long id;
 
 	@ManyToOne
-	@JoinTable(name = "category_product")
+	@JoinColumn(name = "category_id")
 //	@Valid
 //	@NotNull
 	private Category category;
@@ -27,17 +26,17 @@ public class Product {
 	private String description;
 	private double price;
 
-	@Temporal(TemporalType.DATE)
-	@NotNull
-	private Date creationDate;
+//	@Temporal(TemporalType.DATE)
+//	@NotNull
+	private LocalDate creationDate;
 	private String attributes;
 	private long vendorId;
 	private String imageUrl;
 	private long stockAmount;
 	//for Order
 	private long soldAmount;
-	private boolean isPublished;
-	private boolean isDeleted;
+	private boolean isPublished = false;
+	private boolean isDeleted= false;
 
 	@ManyToMany
 	@JoinTable
@@ -45,12 +44,13 @@ public class Product {
 
 	public Product() {
 		super();
+		this.creationDate = LocalDate.now();
 		// TODO Auto-generated constructor stub
 	}
 
 
 
-	public Product(@Valid @NotNull Category category, String title, String description, double price, Date creationDate,
+	public Product( Category category, String title, String description, double price, LocalDate creationDate,
 				   String attributes, String imageUrl, long stockAmount, boolean isPublished, boolean isDeleted, List<Promotion> promotions) {
 		super();
 		this.category = category;
@@ -106,11 +106,11 @@ public class Product {
 		this.price = price;
 	}
 
-	public Date getCreationDate() {
+	public LocalDate getCreationDate() {
 		return creationDate;
 	}
 
-	public void setCreationDate(Date creationDate) {
+	public void setCreationDate(LocalDate creationDate) {
 		this.creationDate = creationDate;
 	}
 

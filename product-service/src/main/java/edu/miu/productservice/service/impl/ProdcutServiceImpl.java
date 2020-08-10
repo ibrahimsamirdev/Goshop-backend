@@ -5,6 +5,7 @@ import java.util.List;
 import edu.miu.productservice.model.Product;
 import edu.miu.productservice.exception.NoSuchResourceException;
 import edu.miu.productservice.repository.ProductRepository;
+import edu.miu.productservice.service.ImageService;
 import edu.miu.productservice.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
@@ -19,6 +21,9 @@ public class ProdcutServiceImpl implements ProductService {
 
 	@Autowired
     ProductRepository productRepository;
+
+	@Autowired
+	private ImageService imageService;
 
 	@Override
 	public Product addProduct(Product product) {
@@ -104,6 +109,59 @@ public class ProdcutServiceImpl implements ProductService {
 	//find by category name
 	public List<Product> findByCategoryName(String name){
 		return productRepository.findByCategoryName(name);
+	}
+
+	@Override
+	public List<Product> getVendorProducts(long vendorId) {
+		return productRepository.findByVendorIdAndIsDeletedFalse(vendorId);
+	}
+
+	@Override
+	public Product createProductWithImage(MultipartFile image, Product product) {
+
+		String imageUrl = imageService.uploadOnePhoto(product.getVendorId(), image);
+		product.setImageUrl(imageUrl);
+		return productRepository.save(product);
+	}
+
+	@Override
+	public Product updateProductWithImage(MultipartFile image, Product product) {
+
+		if(image != null) {
+			String imageUrl = imageService.uploadOnePhoto(product.getVendorId(), image);
+			product.setImageUrl(imageUrl);
+		}
+		return productRepository.save(product);
+	}
+
+	@Override
+	public List<Product> getVendorPublishedProducts(long vendorId) {
+		return productRepository.findProductByVendorIdAndIsPublishedTrueAndIsDeletedFalse(vendorId);
+	}
+
+	@Override
+	public List<Product> getVendorNonPublishedProducts(long vendorId) {
+		return productRepository.findProductByVendorIdAndIsPublishedNotAndIsDeletedFalse(vendorId, true);
+	}
+
+	@Override
+	public List<Product> getNonDeletedProducts() {
+		return productRepository.findByIsDeletedNot(true);
+	}
+
+	@Override
+	public List<Product> getDeletedProducts() {
+		return productRepository.findByIsDeletedTrue();
+	}
+
+	@Override
+	public List<Product> getPublishedProducts() {
+		return productRepository.findProductByIsPublishedTrueAndIsDeletedFalse();
+	}
+
+	@Override
+	public List<Product> getNonPublishedProducts() {
+		return productRepository.findProductByIsPublishedNotAndIsDeletedFalse(true);
 	}
 
 

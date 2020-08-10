@@ -13,4 +13,7 @@ public interface CategoryService {
 
     public Category editCategory(long categoryId, Category edit_category);
     public Category deleteCategory(long categoryId) throws NoSuchResourceException;
+
+    List<Category> getAllSubCategory();
+
 }

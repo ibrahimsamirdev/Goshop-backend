@@ -2,12 +2,7 @@ package edu.miu.productservice.model;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 @Entity
 public class Category {
@@ -24,20 +19,32 @@ public class Category {
 
 	private boolean isDeleted;
 	
-	@OneToMany(cascade = {CascadeType.ALL})
-	private List<Category> subCategories;
+//	@OneToMany(cascade = {CascadeType.ALL})
+//	private List<Category> subCategories;
+
+	@ManyToOne
+	@JoinColumn(name="category_id")
+	private Category partentCaregory;
+
 
 	public Category() {
-		super();
-		
 	}
 
-	public Category(String name, String description, boolean isDeleted, List<Category> subCategories) {
+
+	public Category(String name, String description, boolean isDeleted, Category partentCaregory) {
 		this.name = name;
 		this.description = description;
 		this.isDeleted = isDeleted;
-		this.subCategories = subCategories;
+		this.partentCaregory = partentCaregory;
 	}
+//	public Category(String name, String description, boolean isDeleted, List<Category> subCategories) {
+//		this.name = name;
+//		this.description = description;
+//		this.isDeleted = isDeleted;
+//		this.subCategories = subCategories;
+//	}
+
+
 
 	public long getId() {
 		return id;
@@ -70,14 +77,28 @@ public class Category {
 		this.isDeleted = isDeleted;
 	}
 
-	public List<Category> getSubCategories() {
-		return subCategories;
+//	public List<Category> getSubCategories() {
+//		return subCategories;
+//	}
+//
+//	public void setSubCategories(List<Category> subCategories) {
+//		this.subCategories = subCategories;
+//	}
+
+
+	public boolean isDeleted() {
+		return isDeleted;
 	}
 
-	public void setSubCategories(List<Category> subCategories) {
-		this.subCategories = subCategories;
+	public void setDeleted(boolean deleted) {
+		isDeleted = deleted;
 	}
 
+	public Category getPartentCaregory() {
+		return partentCaregory;
+	}
 
-
+	public void setPartentCaregory(Category partentCaregory) {
+		this.partentCaregory = partentCaregory;
+	}
 }

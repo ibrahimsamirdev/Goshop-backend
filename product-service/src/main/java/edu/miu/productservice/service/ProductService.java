@@ -5,6 +5,7 @@ import java.util.List;
 import edu.miu.productservice.model.Product;
 import edu.miu.productservice.exception.NoSuchResourceException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface ProductService {
 	public Product addProduct(Product product);
@@ -20,6 +21,22 @@ public interface ProductService {
 	public  List<Product> findByTitleAndDescription(String title,String description);
 	public List<Product> findByCategoryName(String name);
 
+	List<Product> getVendorProducts(long vendorId);
 
+	Product createProductWithImage(MultipartFile image, Product product);
+
+	Product updateProductWithImage(MultipartFile image, Product product);
+
+	List<Product> getVendorPublishedProducts(long vendorId);
+
+	List<Product> getVendorNonPublishedProducts(long vendorId);
+
+	List<Product> getNonDeletedProducts();
+
+	List<Product> getDeletedProducts();
+
+	List<Product> getPublishedProducts();
+
+	List<Product> getNonPublishedProducts();
 
 }
