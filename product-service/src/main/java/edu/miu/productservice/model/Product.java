@@ -35,8 +35,8 @@ public class Product {
 	private long stockAmount;
 	//for Order
 	private long soldAmount;
-	private boolean isPublished;
-	private boolean isDeleted;
+	private boolean isPublished = false;
+	private boolean isDeleted= false;
 
 	@ManyToMany
 	@JoinTable

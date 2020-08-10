@@ -28,6 +28,10 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     //Traverse associations in derived queries
      List<Product> findByCategoryName(String title);
 
-     List<Product> findByVendorId(long vendorId);
+     List<Product> findByVendorIdAndIsDeletedFalse(long vendorId);
+
+     List<Product> findProductByVendorIdAndIsPublishedTrueAndIsDeletedFalse(long vendorId);
+
+    List<Product> findProductByVendorIdAndIsPublishedNotAndIsDeletedFalse(long vendorId, boolean t);
 
 }

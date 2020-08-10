@@ -113,7 +113,7 @@ public class ProdcutServiceImpl implements ProductService {
 
 	@Override
 	public List<Product> getVendorProducts(long vendorId) {
-		return productRepository.findRProductsByVendorId(vendorId);
+		return productRepository.findByVendorIdAndIsDeletedFalse(vendorId);
 	}
 
 	@Override
@@ -122,6 +122,26 @@ public class ProdcutServiceImpl implements ProductService {
 		String imageUrl = imageService.uploadOnePhoto(product.getVendorId(), image);
 		product.setImageUrl(imageUrl);
 		return productRepository.save(product);
+	}
+
+	@Override
+	public Product updateProductWithImage(MultipartFile image, Product product) {
+
+		if(image != null) {
+			String imageUrl = imageService.uploadOnePhoto(product.getVendorId(), image);
+			product.setImageUrl(imageUrl);
+		}
+		return productRepository.save(product);
+	}
+
+	@Override
+	public List<Product> getVendorPublishedProducts(long vendorId) {
+		return productRepository.findProductByVendorIdAndIsPublishedTrueAndIsDeletedFalse(vendorId);
+	}
+
+	@Override
+	public List<Product> getVendorNonPublishedProducts(long vendorId) {
+		return productRepository.findProductByVendorIdAndIsPublishedNotAndIsDeletedFalse(vendorId, true);
 	}
 
 

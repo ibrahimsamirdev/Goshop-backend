@@ -79,22 +79,22 @@ public class ProductController {
         return new ResponseEntity<Product>(product, HttpStatus.OK);
     }
 
-    @PutMapping(value = "/{productId}")
-    public ResponseEntity<Product> editProduct(@PathVariable long productId, @RequestBody Product product) {
+    @PutMapping
+    public ResponseEntity<Product> editProduct( @RequestBody Product product) {
 
         HttpHeaders headers = new HttpHeaders();
-        Product product_toEdit = productService.getProduct(productId);
+        Product product_toEdit = productService.getProduct(product.getId());
 
         if (product_toEdit == null) {
 
             return new ResponseEntity<Product>(HttpStatus.NOT_FOUND);
         }
 
-        productService.editProduct(productId, product);
+        Product updatedProduct = productService.editProduct(product.getId(), product);
 
-        headers.add("Updated Block : ", String.valueOf(productId));
+        headers.add("Updated Block : ", String.valueOf(product.getId()));
 
-        return new ResponseEntity<Product>(product, headers, HttpStatus.OK);
+        return new ResponseEntity<Product>(updatedProduct, headers, HttpStatus.OK);
     }
 
 
@@ -181,11 +181,30 @@ public class ProductController {
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
+    @GetMapping("/published/vendor/{id}")
+    public ResponseEntity<Object> getVendorPublishedProducts(@PathVariable("id") long id){
+        List<Product> products =  productService.getVendorPublishedProducts(id);
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+
+    @GetMapping("/nonPublished/vendor/{id}")
+    public ResponseEntity<Object> getVendorNonPublishedProducts(@PathVariable("id") long id){
+        List<Product> products =  productService.getVendorNonPublishedProducts(id);
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+
     @PostMapping("/uploadProduct")
-    public ResponseEntity<Object> uloadProduct(@RequestParam("image")MultipartFile image, @RequestPart("product") Product product){
+    public ResponseEntity<Object> uploadProduct(@RequestParam("image")MultipartFile image, @RequestPart("product") Product product){
 //        List<Product> products =  productService.getVendorProducts(id);
         Product createdProduct = productService.createProductWithImage(image, product);
         return new ResponseEntity<>(createdProduct, HttpStatus.OK);
+    }
+
+    @PutMapping("/updateProductWithImage")
+    public ResponseEntity<Object> updateProduct(@RequestParam("image")MultipartFile image, @RequestPart("product") Product product){
+//        List<Product> products =  productService.getVendorProducts(id);
+        Product updatedProduct = productService.updateProductWithImage(image, product);
+        return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
     }
 
 

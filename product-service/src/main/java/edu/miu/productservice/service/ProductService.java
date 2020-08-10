@@ -25,4 +25,10 @@ public interface ProductService {
 
 	Product createProductWithImage(MultipartFile image, Product product);
 
+	Product updateProductWithImage(MultipartFile image, Product product);
+
+	List<Product> getVendorPublishedProducts(long vendorId);
+
+	List<Product> getVendorNonPublishedProducts(long vendorId);
+
 }
