@@ -10,9 +10,9 @@ public interface PaymentMethodService {
 
 	PaymentMethod getById(long id);
 
-	List<PaymentMethod> getAllByUserId(long userId);
+	PaymentMethod getByUserId(long userId);
 
-	void addPaymentMethod(PaymentMethod paymentMethod);
+	PaymentMethod addPaymentMethod(PaymentMethod paymentMethod);
 
 	void updatePaymentMethod(PaymentMethod paymentMethod);
 
