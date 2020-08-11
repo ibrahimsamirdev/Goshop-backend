@@ -16,4 +16,5 @@ public interface CategoryService {
 
     List<Category> getAllSubCategory();
 
+    List<Category> getAllParentCategory();
 }

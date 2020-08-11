@@ -109,4 +109,9 @@ public class CategoryController {
     public ResponseEntity<Object> getSubCaregories(){
         return new ResponseEntity<Object>(categoryService.getAllSubCategory(), HttpStatus.OK);
     }
+
+    @GetMapping(value = "/parentCategories")
+    public ResponseEntity<Object> getParentCategories(){
+        return new ResponseEntity<Object>(categoryService.getAllParentCategory(), HttpStatus.OK);
+    }
 }
