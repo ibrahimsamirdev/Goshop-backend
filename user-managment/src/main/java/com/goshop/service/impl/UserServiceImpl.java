@@ -76,7 +76,13 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void deleteUser(long id) {
-		userRepo.deleteById(id);
+		Optional<User> u = userRepo.findById(id);
+		if(!u.isPresent()){
+			throw new CustomException("user is not found", HttpStatus.NOT_FOUND);
+		}
+		User user = u.get();
+		user.setDeleted(true);
+		userRepo.save(user);
 	}
 
 	@Override
@@ -103,6 +109,16 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> getAllVendors() {
 		return userRepo.findByRole_Role(RoleType.vendor);
+	}
+
+	@Override
+	public List<User> getActivedUsers() {
+		return userRepo.findByIsDeletedFalseOrIsDeletedIsNull();
+	}
+
+	@Override
+	public List<User> getNonActivedUsers() {
+		return userRepo.findByIsDeletedTrue();
 	}
 
 

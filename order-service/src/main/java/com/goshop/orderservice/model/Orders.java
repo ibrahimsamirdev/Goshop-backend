@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -20,7 +21,7 @@ public class Orders {
     private double totalAmount;
     private long addressId;
     private long paymentId;
-    private Date creationDate;
+    private LocalDate creationDate;
 
     @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL)
     @JsonIgnoreProperties(value ={"orders"})
@@ -31,7 +32,7 @@ public class Orders {
 
     }
 
-    public Orders(long userId, double totalAmount, long addressId, long paymentId, Set<OrderDetails> orderDetails, Date creationDate) {
+    public Orders(long userId, double totalAmount, long addressId, long paymentId, Set<OrderDetails> orderDetails, LocalDate creationDate) {
         this.userId = userId;
         this.totalAmount = totalAmount;
         this.addressId = addressId;
@@ -41,11 +42,11 @@ public class Orders {
     }
 
 
-    public Date getCreationDate() {
+    public LocalDate getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
     }
 

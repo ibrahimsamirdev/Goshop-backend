@@ -19,6 +19,7 @@ public class User {
 	private String pass;
 	private String mobile;
 	private Boolean isSubscribed;
+	private Boolean isDeleted = false;
 //	@OneToMany(mappedBy = "user")
 //	private Set<Address> addresses;
 	@ManyToOne
@@ -91,5 +92,13 @@ public class User {
 
 	public void setVendor(User vendor) {
 		this.vendor = vendor;
+	}
+
+	public Boolean getDeleted() {
+		return isDeleted;
+	}
+
+	public void setDeleted(Boolean deleted) {
+		isDeleted = deleted;
 	}
 }
