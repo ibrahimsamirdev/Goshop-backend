@@ -2,6 +2,7 @@ package com.goshop.service.impl;
 
 import java.util.List;
 
+import com.goshop.model.AddressType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,14 @@ public class AddressServiceImpl implements AddressService {
 			throw new CustomException("User Doesn't Exist", HttpStatus.NOT_FOUND);
 		}
 		return addressRepo.findByUserId(userId);
+	}
+
+	@Override
+	public Address getUserByUserIdAndType(long userId, AddressType type){
+		if (!userRepo.existsById(userId)) {
+			throw new CustomException("User Doesn't Exist", HttpStatus.NOT_FOUND);
+		}
+		return addressRepo.findByUserIdAndType(userId,type);
 	}
 
 	@Override

@@ -49,8 +49,8 @@ public class PaymentMethodController {
 	 */
 	@PostMapping()
 	public ResponseEntity<Object> addPaymentMethod(@RequestBody PaymentMethod paymentMethod) {
-		paymentMethodService.addPaymentMethod(paymentMethod);
-		return new ResponseEntity<Object>("success", HttpStatus.CREATED);
+		PaymentMethod p = paymentMethodService.addPaymentMethod(paymentMethod);
+		return new ResponseEntity<Object>(p, HttpStatus.CREATED);
 	}
 
 	/**
@@ -75,5 +75,9 @@ public class PaymentMethodController {
 	public ResponseEntity<Object> deletePaymentMethod(@PathVariable long id) {
 		paymentMethodService.deletePaymentMethod(id);
 		return new ResponseEntity<Object>("success", HttpStatus.OK);
+	}
+	@GetMapping("/user/{id}")
+	public ResponseEntity<Object> getPaymentMethodByUserId(@PathVariable("id") long id){
+		return new ResponseEntity<Object>(paymentMethodService.getByUserId(id), HttpStatus.OK);
 	}
 }

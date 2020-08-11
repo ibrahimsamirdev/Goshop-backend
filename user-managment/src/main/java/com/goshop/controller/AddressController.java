@@ -2,6 +2,7 @@ package com.goshop.controller;
 
 import java.util.List;
 
+import com.goshop.model.AddressType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +39,18 @@ public class AddressController {
 	public ResponseEntity<Object> getAllAddresses(@PathVariable long userId) {
 		List<Address> addresses = addressService.getAllByUserId(userId);
 		return new ResponseEntity<Object>(addresses, HttpStatus.OK);
+	}
+
+	@GetMapping("/user/shipping/{userId}")
+	public Address getShippingAddresses(@PathVariable long userId) {
+		Address address = addressService.getUserByUserIdAndType(userId,AddressType.shipping);
+		return address;
+	}
+
+	@GetMapping("/user/billing/{userId}")
+	public Address getBillingAddresses(@PathVariable long userId) {
+		Address address = addressService.getUserByUserIdAndType(userId, AddressType.billing);
+		return address;
 	}
 
 	/**

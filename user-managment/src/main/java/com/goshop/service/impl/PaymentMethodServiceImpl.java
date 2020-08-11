@@ -1,6 +1,7 @@
 package com.goshop.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,19 +34,27 @@ public class PaymentMethodServiceImpl implements PaymentMethodService {
 	}
 
 	@Override
-	public List<PaymentMethod> getAllByUserId(long userId) {
+	public PaymentMethod getByUserId(long userId) {
 		if (!userRepo.existsById(userId)) {
 			throw new CustomException("User Doesn't Exist", HttpStatus.NOT_FOUND);
 		}
-		return paymentMethodRepo.findByUserId(userId);
+		Optional<PaymentMethod> p = paymentMethodRepo.findByUserId(userId);
+		return p.get();
 	}
 
 	@Override
-	public void addPaymentMethod(PaymentMethod paymentMethod) {
+	public PaymentMethod addPaymentMethod(PaymentMethod paymentMethod) {
 		if (!userRepo.existsById(paymentMethod.getUser().getId())) {
 			throw new CustomException("User Doesn't Exist", HttpStatus.NOT_FOUND);
 		}
-		paymentMethodRepo.save(paymentMethod);
+		boolean isValid = true;
+		// call paymentMicroservives to check thecard is avlid
+		if(isValid){
+			return  paymentMethodRepo.save(paymentMethod);
+		}else{
+			throw new CustomException("Card is not Valid ",HttpStatus.NOT_ACCEPTABLE);
+		}
+
 	}
 
 	@Override
