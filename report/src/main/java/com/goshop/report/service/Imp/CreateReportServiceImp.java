@@ -65,4 +65,28 @@ public class CreateReportServiceImp implements CreateReportService {
         JasperExportManager.exportReportToPdfStream(jasperPrint, response.getOutputStream());
         return response;
     }
+
+    @Override
+    public void createPdfReportSalesForEmail(List dataList, Map parameters, String pathname, String Type) throws IOException, JRException {
+        // Fetching the .jrxml file from the folder.
+        // final InputStream stream = this.getClass().getResourceAsStream("\\templates\\test.jrxml");
+        final InputStream stream = new FileInputStream(new File(pathname));
+        JasperDesign jasperDesign = JRXmlLoader.load(stream);
+        // Compile the Jasper report from .jrxml to .japser
+        final JasperReport report = JasperCompileManager.compileReport(jasperDesign);
+        // creating datasource from bean list
+        JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(dataList);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(report, parameters, beanColDataSource);
+
+//        File pdf = File.createTempFile("output.", ".pdf");
+//        JasperExportManager.exportReportToPdfStream(jasperPrint, new FileOutputStream(pdf));
+
+        if (Type.equalsIgnoreCase("admin"))
+            JasperExportManager.exportReportToPdfFile(jasperPrint, "E:\\MUM\\9-PM\\0-git-repo\\Goshop-backend\\report\\src\\main\\resources\\" + "adminReport.pdf");
+        else
+            JasperExportManager.exportReportToPdfFile(jasperPrint, "E:\\MUM\\9-PM\\0-git-repo\\Goshop-backend\\report\\src\\main\\resources\\" + "vendorReport.pdf");
+
+        // JasperExportManager.exportReportToPdfStream(jasperPrint, response.getOutputStream());
+//        return response;
+    }
 }
