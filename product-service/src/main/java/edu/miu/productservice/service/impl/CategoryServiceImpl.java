@@ -5,7 +5,6 @@ import edu.miu.productservice.model.Category;
 import edu.miu.productservice.repository.CategoryRepository;
 import edu.miu.productservice.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +27,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Category getCategory(long categoryId) throws NoSuchResourceException {
         Category category = categoryRepository.findById(categoryId).orElseThrow(() ->
-                new NoSuchResourceException("No Category found  with" , categoryId));
+                new NoSuchResourceException("No Category found  with", categoryId));
 
         return category;
     }
@@ -44,7 +43,7 @@ public class CategoryServiceImpl implements CategoryService {
     public Category editCategory(long categoryId, Category edit_category) {
 
         Category category = categoryRepository.findById(categoryId).orElseThrow(() ->
-                new NoSuchResourceException("No category found  with" , categoryId));
+                new NoSuchResourceException("No category found  with", categoryId));
 
         category.setDescription(edit_category.getDescription());
         category.setName(edit_category.getName());
@@ -64,8 +63,23 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public Category activeCategory(long categoryId) throws NoSuchResourceException {
+        Category category = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new NoSuchResourceException("No category found  with", categoryId));
+
+        category.setIsDeleted(false);
+
+
+        return categoryRepository.save(category);
+    }
+
+    @Override
     public List<Category> getAllSubCategory() {
         return categoryRepository.findByPartentCaregoryNotNull();
     }
 
+    @Override
+    public List<Category> getAllParentCategory() {
+        return categoryRepository.findByPartentCaregoryIsNull();
+    }
 }

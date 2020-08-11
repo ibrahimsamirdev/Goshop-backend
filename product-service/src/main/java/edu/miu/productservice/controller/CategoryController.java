@@ -100,13 +100,20 @@ public class CategoryController {
     @DeleteMapping(value="/{categoryId}")
     public Category deleteCategory(@PathVariable long categoryId){
 
-
-
         return  categoryService.deleteCategory(categoryId);
     }
+    @DeleteMapping(value="/active/{categoryId}")
+    public Category activeCategory(@PathVariable long categoryId){
 
+        return  categoryService.activeCategory(categoryId);
+    }
     @GetMapping(value = "/subCategories")
     public ResponseEntity<Object> getSubCaregories(){
         return new ResponseEntity<Object>(categoryService.getAllSubCategory(), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/parentCategories")
+    public ResponseEntity<Object> getParentCategories(){
+        return new ResponseEntity<Object>(categoryService.getAllParentCategory(), HttpStatus.OK);
     }
 }

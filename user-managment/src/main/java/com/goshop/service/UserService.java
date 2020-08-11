@@ -26,5 +26,9 @@ public interface UserService {
 
 	List<User> getAllVendors();
 
+	List<User> getActivedUsers();
+
+	List<User> getNonActivedUsers();
+
 
 }
