@@ -63,6 +63,17 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public Category activeCategory(long categoryId) throws NoSuchResourceException {
+        Category category = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new NoSuchResourceException("No category found  with", categoryId));
+
+        category.setIsDeleted(false);
+
+
+        return categoryRepository.save(category);
+    }
+
+    @Override
     public List<Category> getAllSubCategory() {
         return categoryRepository.findByPartentCaregoryNotNull();
     }
