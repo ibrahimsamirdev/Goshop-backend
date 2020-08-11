@@ -37,6 +37,18 @@ public class UserController {
 		return new ResponseEntity<Object>(users, HttpStatus.OK);
 	}
 
+	@GetMapping("/active")
+	public ResponseEntity<Object> getActiveUsers() {
+		List<User> users = userService.getActivedUsers();
+		return new ResponseEntity<Object>(users, HttpStatus.OK);
+	}
+
+	@GetMapping("/nonActive")
+	public ResponseEntity<Object> getNonActiveUsers() {
+		List<User> users = userService.getNonActivedUsers();
+		return new ResponseEntity<Object>(users, HttpStatus.OK);
+	}
+
 	/**
 	 * Get User by Id
 	 * 

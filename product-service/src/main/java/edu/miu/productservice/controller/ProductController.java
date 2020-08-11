@@ -120,7 +120,7 @@ public class ProductController {
     }
 
     //Emad -- publish & unPublish
-    @PutMapping(value = "publish/{productId}")
+    @GetMapping(value = "/publish/{productId}")
     public ResponseEntity<Product> publishProduct(@PathVariable long productId) {
 
         HttpHeaders headers = new HttpHeaders();
@@ -139,7 +139,7 @@ public class ProductController {
         return new ResponseEntity<Product>(product_toEdit, headers, HttpStatus.OK);
     }
 
-    @PutMapping(value = "unPublish/{productId}")
+    @GetMapping(value = "/unPublish/{productId}")
     public ResponseEntity<Product> unPublishProduct(@PathVariable long productId) {
 
         HttpHeaders headers = new HttpHeaders();
