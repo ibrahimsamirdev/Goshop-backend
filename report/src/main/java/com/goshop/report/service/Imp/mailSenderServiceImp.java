@@ -10,8 +10,6 @@ import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-
-import javax.mail.MessagingException;
 import java.io.IOException;
 
 @Service
@@ -21,7 +19,7 @@ public class mailSenderServiceImp implements mailSenderService {
     private JavaMailSender javaMailSender;
 
     @Override
-    public void sendEmail(String toEmail,String subject,String text) {
+    public void sendEmail(String toEmail, String subject, String text) {
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setTo(toEmail);
 
@@ -32,7 +30,7 @@ public class mailSenderServiceImp implements mailSenderService {
     }
 
     @Override
-    public void sendEmailWithAttachment(String toEmail,String subject) throws MessagingException, IOException {
+    public void sendEmailWithAttachment(String toEmail, String subject, String Type) throws MessagingException, IOException {
         MimeMessage msg = javaMailSender.createMimeMessage();
         // true = multipart message
         MimeMessageHelper helper = new MimeMessageHelper(msg, true);
@@ -42,10 +40,12 @@ public class mailSenderServiceImp implements mailSenderService {
 
         helper.setText("<h1>Check attachment for PDF!</h1>", true);
 
-        helper.addAttachment("Employee_report.pdf", new ClassPathResource("Employee_report.pdf"));
+        if (Type.equalsIgnoreCase("Admin"))
+            helper.addAttachment("adminReport.pdf", new ClassPathResource("adminReport.pdf"));
+        else
+            helper.addAttachment("vendorReport.pdf", new ClassPathResource("vendorReport.pdf"));
 
         javaMailSender.send(msg);
-
 
 
     }

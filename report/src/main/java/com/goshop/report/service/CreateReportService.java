@@ -17,5 +17,5 @@ public interface CreateReportService {
     public HttpServletResponse createPdfReportSalesVendor(HttpServletResponse response, List<ReportProductDto> dataList, Map parameters, String pathname) throws IOException, JRException;
 
     public HttpServletResponse createPdfReportSalesAdmin(HttpServletResponse response, List<AdminReportProductDto> dataList, Map parameters, String pathname) throws IOException, JRException;
-
+    public void  createPdfReportSalesForEmail(List dataList, Map parameters, String pathname ,String Type) throws IOException, JRException;
 }
