@@ -13,6 +13,7 @@ public class Address {
 	@GeneratedValue
 	private long id;
 	private String city;
+	private String state;
 	private String country;
 	private String street;
 	private int zipcode;
@@ -27,6 +28,14 @@ public class Address {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
 	}
 
 	public String getCity() {
