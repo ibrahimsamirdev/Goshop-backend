@@ -1,5 +1,6 @@
 package edu.miu.productservice.service.impl;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import edu.miu.productservice.exception.NoSuchResourceException;
@@ -35,7 +36,7 @@ public class PromotionServiceImpl implements PromotionService {
 	}
 
 	@Override
-	public List<Promotion> getPromotions() {
+	public List<Promotion> getAllPromotions() {
 		 
 		return promotionRepository.findAll();
 	}
@@ -59,11 +60,35 @@ public class PromotionServiceImpl implements PromotionService {
 		Promotion promotion = promotionRepository.findById(promotionId)
 				.orElseThrow(() -> new NoSuchResourceException("No Promotion found  with", promotionId));
 
-		promotion.setDeleted(true);
+		if(promotion.isDeleted()){
+			promotion.setDeleted(false);
+		}else{
+			promotion.setDeleted(true);
+		}
+
 
 		return promotionRepository.save(promotion);
 	}
 
-	
+	@Override
+	public List<Promotion> getVendorPormotions(Long vendoId) {
+		return promotionRepository.findByVendorIdAndIsDeletedFalse(vendoId);
+	}
+
+	@Override
+	public List<Promotion> getDeletedPromotions() {
+		return promotionRepository.findByIsDeletedTrue();
+	}
+
+	@Override
+	public List<Promotion> getNonDeletedPromotions() {
+		return promotionRepository.findByIsDeletedFalse();
+	}
+
+	@Override
+	public List<Promotion> getAllVendorValidPromotions(long vendorId) {
+		return promotionRepository.findByStartDateLessThanAndEndDateGreaterThanAndVendorIdAndIsDeletedFalse(LocalDate.now(), LocalDate.now(), vendorId);
+	}
+
 
 }

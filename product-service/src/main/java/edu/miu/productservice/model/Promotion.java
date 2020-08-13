@@ -1,5 +1,6 @@
 package edu.miu.productservice.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -17,10 +18,11 @@ public class Promotion {
 	private long id;
 
 	private String  title;
-	private Date startDate;
-	private Date endDate;
+	private LocalDate startDate;
+	private LocalDate endDate;
 	private double discount;
 	private boolean isDeleted;
+	private Long vendorId;
 
 
 
@@ -30,16 +32,13 @@ public class Promotion {
 
 	}
 
-	public Promotion(String title, Date startDate, Date endDate, double discount) {
+	public Promotion(String title, LocalDate startDate, LocalDate endDate, double discount) {
 		super();
 		this.title = title;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.discount = discount;
 	}
-
-
-
 
 	public long getId() {
 		return id;
@@ -49,28 +48,34 @@ public class Promotion {
 		this.id = id;
 	}
 
-
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public Date getStartDate() {
+
+	public LocalDate getStartDate() {
 		return startDate;
 	}
-	public void setStartDate(Date startDate) {
+
+	public void setStartDate(LocalDate startDate) {
 		this.startDate = startDate;
 	}
-	public Date getEndDate() {
+
+	public LocalDate getEndDate() {
 		return endDate;
 	}
-	public void setEndDate(Date endDate) {
+
+	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
 	}
+
 	public double getDiscount() {
 		return discount;
 	}
+
 	public void setDiscount(double discount) {
 		this.discount = discount;
 	}
@@ -83,5 +88,11 @@ public class Promotion {
 		isDeleted = deleted;
 	}
 
+	public Long getVendorId() {
+		return vendorId;
+	}
 
+	public void setVendorId(Long vendorId) {
+		this.vendorId = vendorId;
+	}
 }

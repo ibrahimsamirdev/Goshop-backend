@@ -38,7 +38,7 @@ public class PromotionController {
 		
 		HttpHeaders headers = new HttpHeaders();
 
-		List<Promotion> promotions = promotionService.getPromotions();
+		List<Promotion> promotions = promotionService.getAllPromotions();
 
 		if (promotions == null) {
 			return new ResponseEntity<List<Promotion>>(HttpStatus.NOT_FOUND);
@@ -47,7 +47,23 @@ public class PromotionController {
 
 		return new ResponseEntity<List<Promotion>>(promotions, headers, HttpStatus.OK);
 	}
-	
+
+	@GetMapping(value = "/nonDeleted")
+	public ResponseEntity<List<Promotion>> getNonDeletedPromotions(){
+
+		List<Promotion> promotions = promotionService.getNonDeletedPromotions();
+
+		return new ResponseEntity<List<Promotion>>(promotions, HttpStatus.OK);
+	}
+
+	@GetMapping(value = "/deleted")
+	public ResponseEntity<List<Promotion>> getDeletedPromotions(){
+
+		List<Promotion> promotions = promotionService.getDeletedPromotions();
+
+		return new ResponseEntity<List<Promotion>>(promotions, HttpStatus.OK);
+	}
+
 	@GetMapping(value = "/{promotionId}")
 	public ResponseEntity<Promotion> getPromotion(@PathVariable long promotionId) {
 
@@ -87,4 +103,14 @@ public class PromotionController {
 		return  promotionService.deletePromotion(promotionId);
 	}
 
+	@GetMapping("/vendor/{id}")
+	public ResponseEntity<List<Promotion>> getVendorPormotions(@PathVariable Long id){
+		return new ResponseEntity<>(promotionService.getVendorPormotions(id), HttpStatus.OK);
+
+	}
+
+	@GetMapping("/vendor/validPromotions/{id}")
+	public ResponseEntity<Object> getAllVendorValidPromotions(@PathVariable("id") long id){
+		return new ResponseEntity<>(promotionService.getAllVendorValidPromotions(id), HttpStatus.OK);
+	}
 }
