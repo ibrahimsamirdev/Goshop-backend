@@ -232,4 +232,11 @@ public class ProductController {
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
+    @PostMapping("/findAllProductIn")
+        public ResponseEntity<Object> findAllProductIn(@RequestBody List<Long> ProductIds){
+        System.out.println(">>>>>>>>>>>>>>>>>");
+        System.out.println(ProductIds.toString());
+        return new ResponseEntity<>( productService.findAllProductIn(ProductIds),new HttpHeaders(), HttpStatus.OK);
+    }
+
 }

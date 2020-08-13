@@ -39,4 +39,5 @@ public interface ProductService {
 
 	List<Product> getNonPublishedProducts();
 
+	List<Product> findAllProductIn(List<Long> ProductIds);
 }

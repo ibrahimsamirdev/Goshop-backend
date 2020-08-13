@@ -164,5 +164,8 @@ public class ProdcutServiceImpl implements ProductService {
 		return productRepository.findProductByIsPublishedNotAndIsDeletedFalse(true);
 	}
 
-
+	@Override
+	public List<Product> findAllProductIn(List<Long> ProductIds)	{
+		return productRepository.findProductsByIdIn(ProductIds);
+}
 }
