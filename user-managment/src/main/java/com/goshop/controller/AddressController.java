@@ -42,9 +42,9 @@ public class AddressController {
 	}
 
 	@GetMapping("/user/shipping/{userId}")
-	public Address getShippingAddresses(@PathVariable long userId) {
+	public ResponseEntity<Object> getShippingAddresses(@PathVariable long userId) {
 		Address address = addressService.getUserByUserIdAndType(userId,AddressType.shipping);
-		return address;
+		return  new ResponseEntity<Object>(address, HttpStatus.OK);
 	}
 
 	@GetMapping("/user/billing/{userId}")
@@ -73,8 +73,8 @@ public class AddressController {
 	 */
 	@PostMapping()
 	public ResponseEntity<Object> addAddress(@RequestBody Address address) {
-		addressService.addAddress(address);
-		return new ResponseEntity<Object>("success", HttpStatus.CREATED);
+
+		return new ResponseEntity<Object>(addressService.addAddress(address), HttpStatus.CREATED);
 	}
 
 	/**

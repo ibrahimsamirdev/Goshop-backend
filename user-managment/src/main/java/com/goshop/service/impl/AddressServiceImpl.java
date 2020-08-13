@@ -50,11 +50,11 @@ public class AddressServiceImpl implements AddressService {
 	}
 
 	@Override
-	public void addAddress(Address address) {
+	public Address addAddress(Address address) {
 		if (!userRepo.existsById(address.getUser().getId())) {
 			throw new CustomException("User Doesn't Exist", HttpStatus.NOT_FOUND);
 		}
-		addressRepo.save(address);
+	return 	addressRepo.save(address);
 	}
 
 	@Override

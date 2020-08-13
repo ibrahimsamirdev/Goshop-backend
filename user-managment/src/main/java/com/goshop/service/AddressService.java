@@ -15,7 +15,7 @@ public interface AddressService {
 
 	Address getUserByUserIdAndType(long userId, AddressType type);
 
-	void addAddress(Address address);
+	Address addAddress(Address address);
 
 	void updateAddress(Address address);
 
