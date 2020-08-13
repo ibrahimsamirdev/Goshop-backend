@@ -7,6 +7,7 @@ import com.goshop.report.feignproxy.ProductProxy;
 import com.goshop.report.service.CreateReportService;
 import com.goshop.report.service.mailSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -21,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping(value = "/email")
 public class SMTPController {
 
@@ -31,6 +33,12 @@ public class SMTPController {
 
     @Autowired
     ProductProxy productProxy;
+
+    @Value("${report.resource}")
+    private String resourcePath;
+
+    @Value("${report.template}")
+    private String templatePath;
 
 
     @PostMapping("/text")
@@ -81,7 +89,7 @@ public class SMTPController {
 
         parameters.put("createdBy", "Super Admin");
 
-        String pathname = "E:\\MUM\\9-PM\\0-git-repo\\Goshop-backend\\report\\src\\main\\resources\\templates\\viewAdminSalesReports.jrxml";
+        String pathname = templatePath + "viewAdminSalesReports.jrxml";
         try {
             createReportService.createPdfReportSalesForEmail(reportProductDtos, parameters, pathname,"admin");
             System.out.println("pdf done");
@@ -97,7 +105,7 @@ public class SMTPController {
 
         parameters.put("createdBy", "Super Admin");
 
-        String pathname = "E:\\MUM\\9-PM\\0-git-repo\\Goshop-backend\\report\\src\\main\\resources\\templates\\viewSalesReportsLive.jrxml";
+        String pathname = templatePath + "viewSalesReportsLive.jrxml";
         try {
             createReportService.createPdfReportSalesForEmail(reportProductDtos, parameters, pathname,"vendor");
             System.out.println("pdf done");

@@ -7,10 +7,8 @@ import com.goshop.report.feignproxy.ProductProxy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping(value = "/report")
 public class SalesReportsController {
 
@@ -31,6 +30,9 @@ public class SalesReportsController {
     @Autowired
     ProductProxy productProxy;
 
+    @Value("${report.template}")
+    private String templatePath;
+
     @GetMapping(value = "/VendorReportSales/{id}")
     public void getSalesReport(HttpServletResponse response, @PathVariable String id) {
         log.info("Preparing the pdf report via jasper.");
@@ -42,7 +44,7 @@ public class SalesReportsController {
 
         parameters.put("createdBy", "test");
 
-        String pathname = "E:\\MUM\\9-PM\\0-git-repo\\Goshop-backend\\report\\src\\main\\resources\\templates\\viewSalesReportsLive.jrxml";
+        String pathname = templatePath + "viewSalesReportsLive.jrxml";
         try {
             response = createReportService.createPdfReportSalesVendor(response, reportProductDtos, parameters, pathname);
             log.info("Report create in response successfully saved at response.");
@@ -66,7 +68,7 @@ public class SalesReportsController {
 
         parameters.put("createdBy", "Super Admin");
 
-        String pathname = "E:\\MUM\\9-PM\\0-git-repo\\Goshop-backend\\report\\src\\main\\resources\\templates\\viewAdminSalesReports.jrxml";
+        String pathname = templatePath + "viewAdminSalesReports.jrxml";
         try {
             response = createReportService.createPdfReportSalesAdmin(response, reportProductDtos, parameters, pathname);
             log.info("Report create in response successfully saved at response.");
