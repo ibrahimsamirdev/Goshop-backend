@@ -6,18 +6,19 @@ import com.goshop.orderservice.model.OrderDetails;
 import com.goshop.orderservice.model.Orders;
 import com.goshop.orderservice.service.OrderService;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/order")
+@CrossOrigin("*")
 public class OrderController {
 
     @Autowired
@@ -39,7 +40,7 @@ public class OrderController {
             return new ResponseEntity<Set<OrderDto>>(HttpStatus.NOT_FOUND);
         }
 
-       Set<OrderDto> orderDtos=orders.stream().map(this::convertToDto).collect(Collectors.toSet());
+        Set<OrderDto> orderDtos = orders.stream().map(this::convertToDto).collect(Collectors.toSet());
         headers.add("Number of Orders returned", String.valueOf(orders.size()));
         return new ResponseEntity<Set<OrderDto>>(orderDtos, HttpStatus.OK);
     }
@@ -48,7 +49,7 @@ public class OrderController {
     @GetMapping(value = "/{orderId}")
     public ResponseEntity<OrderDto> getOrder(@PathVariable String orderId) {
 
-        System.out.println("========> "+ orderId);
+        System.out.println("========> " + orderId);
 
         Optional<Orders> order = orderService.getOrder(Long.parseLong(orderId));
 
@@ -56,7 +57,7 @@ public class OrderController {
             return new ResponseEntity<OrderDto>(HttpStatus.NOT_FOUND);
         }
 
-        OrderDto orderDto=convertToDto(order.get());
+        OrderDto orderDto = convertToDto(order.get());
 
         System.out.println("Order " + order.get());
         return new ResponseEntity<OrderDto>(orderDto, HttpStatus.OK);
@@ -97,13 +98,13 @@ public class OrderController {
         }
 
         Orders orders = convertToEntity(orderDto);
-        Set<OrderDetails> orderDetails=orders.getOrderDetails();
+        Set<OrderDetails> orderDetails = orders.getOrderDetails();
         boolean done;
-        for(OrderDetails orderDetail:orderDetails){
-           done= proxy.updateStock(orderDetail.getProductId(),orderDetail.getQuantity());
-           if (!done){
-               return new ResponseEntity<OrderDto>(HttpStatus.BAD_REQUEST);
-           }
+        for (OrderDetails orderDetail : orderDetails) {
+            done = proxy.updateStock(orderDetail.getProductId(), orderDetail.getQuantity());
+            if (!done) {
+                return new ResponseEntity<OrderDto>(HttpStatus.BAD_REQUEST);
+            }
         }
 //        System.out.println( "tttttttttttttttt"+proxy.testRest()) ;
 
