@@ -49,4 +49,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 			+ "AND (:maxprice is null or p.price <= :maxprice) AND isPublished = true AND isDeleted = false")
 	List<Product> searchProducts(String keyword, Long categoryid, Double minprice, Double maxprice);
 
+    List<Product> findProductsByIdIn(List<Long> productIds);
+
 }

@@ -45,6 +45,10 @@ public interface ProductService {
 
 	List<Product> getNonPublishedProducts();
 
+
+	List<Product> findAllProductIn(List<Long> ProductIds);
+
 	public List<Product> search(String keyword, Long categoryid, Double minprice, Double maxprice);
+
 
 }

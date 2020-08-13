@@ -164,6 +164,10 @@ public class ProdcutServiceImpl implements ProductService {
 	}
 
 	@Override
+	public List<Product> findAllProductIn(List<Long> ProductIds)	{
+		return productRepository.findProductsByIdIn(ProductIds);
+}
+	@Override
 	public List<Product> search(String keyword, Long categoryid, Double minprice, Double maxprice) {
 		return productRepository.searchProducts(keyword, categoryid, minprice, maxprice);
 	}

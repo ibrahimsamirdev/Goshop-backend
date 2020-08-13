@@ -57,18 +57,19 @@ public class ProductController {
 
 		HttpHeaders headers = new HttpHeaders();
 
-		Product p = new Product(new Category("Fridge", "Haier", false, null), "Refridgerator", "small size", 100.00,
-				LocalDate.now(), "15 inch", "image/fridge", 50, true, false, null);
-		p.setPromotions(Arrays.asList(
-				new Promotion("Christmas Promotion", new Date(2020, 12, 01), new Date(2020, 12, 30), 0.25),
-				new Promotion("Easter Promotion", new Date(2020, 03, 01), new Date(2020, 04, 04), 0.15)));
+//        Product p = new Product(new Category("Fridge", "Haier",false,null), "Refridgerator", "small size", 100.00, LocalDate.now(), "15 inch", "image/fridge", 50, true, false, null);
+//        p.setPromotions(
+//                Arrays.asList(
+//                        new Promotion("Christmas Promotion", new Date(2020, 12, 01), new Date(2020, 12, 30), 0.25),
+//                        new Promotion("Easter Promotion", new Date(2020, 03, 01), new Date(2020, 04, 04), 0.15)
+//                ));
+
 
 		List<Product> products = productService.getProducts();
-
-		if (products == null) {
-			return new ResponseEntity<List<Product>>(HttpStatus.NOT_FOUND);
-		}
-		headers.add("Number of Blocks returned", String.valueOf(products.size()));
+        if (products == null) {
+            return new ResponseEntity<List<Product>>(HttpStatus.NOT_FOUND);
+        }
+//        headers.add("Number of Blocks returned", String.valueOf(products.size()));
 
 		return new ResponseEntity<List<Product>>(products, headers, HttpStatus.OK);
 
@@ -245,5 +246,12 @@ public class ProductController {
 		List<Product> products = productService.search(keyword, categoryid, minprice, maxprice);
 		return new ResponseEntity<Object>(products, HttpStatus.OK);
 	}
+
+    @PostMapping("/findAllProductIn")
+        public ResponseEntity<Object> findAllProductIn(@RequestBody List<Long> ProductIds){
+        System.out.println(">>>>>>>>>>>>>>>>>");
+        System.out.println(ProductIds.toString());
+        return new ResponseEntity<>( productService.findAllProductIn(ProductIds),new HttpHeaders(), HttpStatus.OK);
+    }
 
 }

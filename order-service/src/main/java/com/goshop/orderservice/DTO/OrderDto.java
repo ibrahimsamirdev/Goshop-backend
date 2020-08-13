@@ -1,6 +1,6 @@
 package com.goshop.orderservice.DTO;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Set;
 
 public class OrderDto {
@@ -10,19 +10,18 @@ public class OrderDto {
     private long addressId;
     private double totalAmount;
     private Set<OrderDetailsDto> orderDetails;
-    private Date creationDate;
+    private LocalDate creationDate;
 
-    public OrderDto(){
+    public OrderDto() {
     }
 
 
-
-    public OrderDto(long userId, long paymentId, long addressId, double totalAmount,Date creationDate ) {
+    public OrderDto(long userId, long paymentId, long addressId, double totalAmount, LocalDate creationDate) {
         this.userId = userId;
         this.paymentId = paymentId;
         this.addressId = addressId;
         this.totalAmount = totalAmount;
-        this.creationDate=creationDate;
+        this.creationDate = creationDate;
     }
 
     public long getId() {
@@ -33,11 +32,11 @@ public class OrderDto {
         this.id = id;
     }
 
-    public Date getCreationDate() {
+    public LocalDate getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
     }
 

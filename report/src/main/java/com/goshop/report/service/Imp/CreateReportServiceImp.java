@@ -8,6 +8,7 @@ import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +21,10 @@ import java.util.Map;
 
 @Service
 public class CreateReportServiceImp implements CreateReportService {
+
+    @Value("${report.resource}")
+    private String resourcePath;
+
     @Override
     public HttpServletResponse createPdfReport(HttpServletResponse response, List<Employee> dataList, Map parameters, String pathname) throws IOException, JRException {
 
@@ -82,9 +87,9 @@ public class CreateReportServiceImp implements CreateReportService {
 //        JasperExportManager.exportReportToPdfStream(jasperPrint, new FileOutputStream(pdf));
 
         if (Type.equalsIgnoreCase("admin"))
-            JasperExportManager.exportReportToPdfFile(jasperPrint, "E:\\MUM\\9-PM\\0-git-repo\\Goshop-backend\\report\\src\\main\\resources\\" + "adminReport.pdf");
+            JasperExportManager.exportReportToPdfFile(jasperPrint, resourcePath + "adminReport.pdf");
         else
-            JasperExportManager.exportReportToPdfFile(jasperPrint, "E:\\MUM\\9-PM\\0-git-repo\\Goshop-backend\\report\\src\\main\\resources\\" + "vendorReport.pdf");
+            JasperExportManager.exportReportToPdfFile(jasperPrint, resourcePath + "vendorReport.pdf");
 
         // JasperExportManager.exportReportToPdfStream(jasperPrint, response.getOutputStream());
 //        return response;

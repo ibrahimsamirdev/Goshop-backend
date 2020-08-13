@@ -6,6 +6,7 @@ import com.goshop.orderservice.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -27,7 +28,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     public Orders addOrder(Orders orders){
-        orders.setCreationDate(new Date());
+        orders.setCreationDate(LocalDate.now());
         return orderRepository.save(orders);
     }
 
